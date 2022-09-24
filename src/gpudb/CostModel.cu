@@ -16,7 +16,7 @@ CostModel::CostModel(int _L, int _total_segment, int _n_group_key, int _n_aggr_k
 	total_segment = _total_segment;
 
 	Operator* op = qo->opRoots[table_id][sg];
-	// cout << op->type << endl;
+	 cout << op->type << endl;
 	opPipeline.push_back(op);
 	op = op->children;
 
