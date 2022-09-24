@@ -15,7 +15,7 @@ int main() {
 
 	srand(123);
 
-	unsigned int size = 52428800 * 24; //400 MB
+	unsigned int size = 5242880 * 24; //400 MB
 	double alpha = 1.0;
 	bool custom = true;
 	bool skipping = true;
@@ -23,7 +23,7 @@ int main() {
 	bool nopipe = false;
 	bool HE = false;
 	
-	CPUGPUProcessing* cgp = new CPUGPUProcessing(size, 0, 52428800 * 15, 52428800 * 20, verbose, custom, skipping);
+	CPUGPUProcessing* cgp = new CPUGPUProcessing(size, 0, 5242880 * 15, 5242880 * 20, verbose, custom, skipping);
 	QueryProcessing* qp;
 
 	cout << endl;
