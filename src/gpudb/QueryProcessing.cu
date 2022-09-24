@@ -2237,11 +2237,22 @@ QueryProcessing::processQuery(CUcontext ctx) {
   cudaEventRecord(start, 0);
 
   qo->prepareOperatorPlacement();
+  if (verbose) {
+    cout << "prepareOperatorPlacement Time: " << time << endl;
+    cout << endl;
+  }
   qo->groupBitmapSegmentTable(0, query);
+  if (verbose) {
+    cout << "groupBitmapSegmentTable Time: " << time << endl;
+    cout << endl;
+  }
     for (int tbl = 0; tbl < qo->join.size(); tbl++) {
       qo->groupBitmapSegmentTable(qo->join[tbl].second->table_id, query);
   }
-
+if (verbose) {
+    cout << "groupBitmapSegmentTable for loop Time: " << time << endl;
+    cout << endl;
+  }
   cudaEventRecord(stop, 0);
   cudaEventSynchronize(stop);
   cudaEventElapsedTime(&time, start, stop);
