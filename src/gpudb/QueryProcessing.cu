@@ -2272,10 +2272,10 @@ QueryProcessing::processQuery(CUcontext ctx) {
     cout << "Result:" << endl;
     int res_count = 0;
     for (int i=0; i< params->total_val; i++) {
-      if (params->res[6*i+4] != 0) {
+      //if (params->res[6*i+4] != 0) {
         cout << params->res[6*i] << " " << params->res[6*i+1] << " " << params->res[6*i+2] << " " << params->res[6*i+3] << " " << reinterpret_cast<unsigned long long*>(&params->res[6*i+4])[0]  << endl;
         res_count++;
-      }
+    //  }
     }
     cout << "Res count = " << res_count << endl;
     cout << "Query Execution Time: " << time << endl;

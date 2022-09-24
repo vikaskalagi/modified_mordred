@@ -38,8 +38,8 @@ CacheManager::CacheManager(size_t _cache_size, size_t _ondemand_size, size_t _pr
 	ondemand_segment = _ondemand_size/SEGMENT_SIZE;
 	processing_size = _processing_size;
 	pinned_memsize = _pinned_memsize;
-	TOT_COLUMN = 25;
-	TOT_TABLE = 5;
+	TOT_COLUMN = 29;
+	TOT_TABLE = 7;
 
 	CubDebugExit(cudaMalloc((void**) &gpuCache, (cache_size + ondemand_size) * sizeof(int)));
 	CubDebugExit(cudaMemset(gpuCache, 0, (cache_size + ondemand_size) * sizeof(int)));
@@ -1210,6 +1210,12 @@ CacheManager::deleteAll() {
 void
 CacheManager::loadColumnToCPU() {
 
+	h_x_key = loadColumnPinned<int>("x_key", X_LEN);
+	h_x_id = loadColumnPinned<int>("x_id", X_LEN);
+	
+	h_y_key = loadColumnPinned<int>("y_key", Y_LEN);
+	h_y_id = loadColumnPinned<int>("y_id", Y_LEN);
+
 	h_lo_orderkey = loadColumnPinnedSort<int>("lo_orderkey", LO_LEN);
 	h_lo_suppkey = loadColumnPinnedSort<int>("lo_suppkey", LO_LEN);
 	h_lo_custkey = loadColumnPinnedSort<int>("lo_custkey", LO_LEN);
@@ -1240,6 +1246,8 @@ CacheManager::loadColumnToCPU() {
 	h_d_year = loadColumnPinned<int>("d_year", D_LEN);
 	h_d_yearmonthnum = loadColumnPinned<int>("d_yearmonthnum", D_LEN);
 
+	
+	
 	lo_orderkey = new ColumnInfo("lo_orderkey", "lo", LO_LEN, 0, 0, h_lo_orderkey);
 	lo_suppkey = new ColumnInfo("lo_suppkey", "lo", LO_LEN, 1, 0, h_lo_suppkey);
 	lo_custkey = new ColumnInfo("lo_custkey", "lo", LO_LEN, 2, 0, h_lo_custkey);
@@ -1270,6 +1278,12 @@ CacheManager::loadColumnToCPU() {
 	d_year = new ColumnInfo("d_year", "d", D_LEN, 23, 4, h_d_year);
 	d_yearmonthnum = new ColumnInfo("d_yearmonthnum", "d", D_LEN, 24, 4, h_d_yearmonthnum);
 
+	x_key = new ColumnInfo("x_key", "x", X_LEN, 25, 5, h_x_key);
+	x_id = new ColumnInfo("x_id", "x", X_LEN, 26, 5, h_x_id);
+
+	y_key = new ColumnInfo("y_key", "y", Y_LEN, 27, 6, h_y_key);
+	y_id = new ColumnInfo("y_id", "y", Y_LEN, 28, 6, h_y_id);
+
 	allColumn[0] = lo_orderkey;
 	allColumn[1] = lo_suppkey;
 	allColumn[2] = lo_custkey;
@@ -1299,6 +1313,12 @@ CacheManager::loadColumnToCPU() {
 	allColumn[22] = d_datekey;
 	allColumn[23] = d_year;
 	allColumn[24] = d_yearmonthnum;
+
+	allColumn[25] = x_key;
+	allColumn[26] = x_id;
+
+	allColumn[27] = y_key;
+	allColumn[28] = y_id;
 
 	columns_in_table.resize(TOT_TABLE);
 	for (int i = 0; i < TOT_COLUMN; i++) {

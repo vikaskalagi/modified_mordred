@@ -17,6 +17,9 @@ QueryOptimizer::QueryOptimizer(size_t _cache_size, size_t _ondemand_size, size_t
 	pkey_fkey[cm->c_custkey] = cm->lo_custkey;
 	pkey_fkey[cm->s_suppkey] = cm->lo_suppkey;
 
+	pkey_fkey[cm->x_key] = cm->y_key;
+	fkey_pkey[cm->y_key] = cm->x_key;
+
 	speedup_segment = new double*[cm->TOT_COLUMN];
 	for (int i = 0; i < cm->TOT_COLUMN; i++) {
 		speedup_segment[i] = new double[cm->allColumn[i]->total_segment];
@@ -117,6 +120,7 @@ QueryOptimizer::parseQuery(int query) {
 	else if (query == 41) parseQuery41();
 	else if (query == 42) parseQuery42();
 	else if (query == 43) parseQuery43();
+	else if (query == 53) parseQuery53();
 	else assert(0);
 }
 
@@ -231,6 +235,47 @@ QueryOptimizer::parseQuery11() {
 	op = new Operator (CPU, 0, 4, Build);
 	op->columns.push_back(cm->d_datekey);
 	op->supporting_columns.push_back(cm->lo_orderdate);
+	opParsed[4].push_back(op);
+
+}
+
+void 
+QueryOptimizer::parseQuery53() {
+
+  queryColumn.resize(cm->TOT_TABLE);
+  queryColumn[5].push_back(cm->x_key);
+  queryColumn[5].push_back(cm->x_id);
+  queryColumn[6].push_back(cm->y_key);
+  queryColumn[6].push_back(cm->y_id);
+
+	querySelectColumn.push_back(cm->x_key);
+	querySelectColumn.push_back(cm->x_id);
+	querySelectColumn.push_back(cm->y_key);
+	queryBuildColumn.push_back(cm->y_id);
+
+	join.resize(1);
+	join[0] = pair<ColumnInfo*, ColumnInfo*> (cm->x_key, cm->y_key);
+
+
+	// select_probe[cm->lo_orderdate].push_back(cm->lo_quantity);
+	// select_probe[cm->lo_orderdate].push_back(cm->lo_discount);
+
+	// select_build[cm->d_datekey].push_back(cm->d_year);
+
+	// dataDrivenOperatorPlacement();
+
+	opParsed.resize(cm->TOT_TABLE);
+
+	Operator* op;
+	op = new Operator (CPU, 0, 5, Probe);
+	op->columns.push_back(cm->x_key);
+	op->supporting_columns.push_back(cm->y_key);
+	opParsed[0].push_back(op);
+
+
+	op = new Operator (CPU, 0, 6, Build);
+	op->columns.push_back(cm->y_key);
+	op->supporting_columns.push_back(cm->x_key);
 	opParsed[4].push_back(op);
 
 }
@@ -3529,12 +3574,48 @@ QueryOptimizer::prepareQuery(int query, Distribution dist) {
 		CubDebugExit(cudaMemset(params->ht_GPU[cm->c_custkey], 0, 2 * params->dim_len[cm->c_custkey] * sizeof(int)));
 
 
-	} else {
+	} 
+	else if (query == 53) {
+			params->selectivity[cm->x_key] = 1;
+			params->real_selectivity[cm->x_key] = 1;
+
+			// if (dist == Zipf) {
+			// 	zipfian[query]->generateZipf();
+			// 	params->compare1[cm->d_year] = zipfian[query]->year.first;
+			// 	params->compare2[cm->d_year] = zipfian[query]->year.second;
+			// 	params->compare1[cm->lo_orderdate] = zipfian[query]->date.first;
+			// 	params->compare2[cm->lo_orderdate] = zipfian[query]->date.second;	
+			// 	params->real_selectivity[cm->d_year] = 1.0/8;			
+			// } else if (dist == Norm) {
+			// 	normal[query]->generateNorm();
+			// 	params->compare1[cm->d_year] = normal[query]->year.first;
+			// 	params->compare2[cm->d_year] = normal[query]->year.second;
+			// 	params->compare1[cm->lo_orderdate] = normal[query]->date.first;
+			// 	params->compare2[cm->lo_orderdate] = normal[query]->date.second;	
+			// 	params->real_selectivity[cm->d_year] = (normal[query]->year.second - normal[query]->year.first + 1.0)/8;			
+			// } else {
+				// params->compare1[cm->d_year] = 1993;
+				// params->compare2[cm->d_year] = 1993;
+				 //params->compare1[cm->lo_orderdate] = 19930101;
+				 //params->compare2[cm->lo_orderdate] = 19931231;
+				 params->total_val = 10;
+			// }
+
+			// CubDebugExit(cudaMemcpyFromSymbol(&(params->map_filter_func_dev[cm->d_year]), p_pred_eq<int, 128, 4>, sizeof(filter_func_t_dev<int, 128, 4>)));
+			// CubDebugExit(cudaMemcpyFromSymbol(&(params->map_filter_func_dev[cm->lo_discount]), p_pred_between<int, 128, 4>, sizeof(filter_func_t_dev<int, 128, 4>)));
+			// CubDebugExit(cudaMemcpyFromSymbol(&(params->map_filter_func_dev[cm->lo_quantity]), p_pred_between<int, 128, 4>, sizeof(filter_func_t_dev<int, 128, 4>)));
+
+			// params->map_filter_func_host[cm->d_year] = &host_pred_eq;
+			// params->map_filter_func_host[cm->lo_discount] = &host_pred_between;
+			// params->map_filter_func_host[cm->lo_quantity] = &host_pred_between;
+
+		}
+		else {
 		assert(0);
 	}
 
 	cout << endl;
-	cout << " Query: " << query << " " << params->compare1[cm->lo_orderdate] << " " << params->compare2[cm->lo_orderdate] << endl;
+	//cout << " Query: " << query << " " << params->compare1[cm->lo_orderdate] << " " << params->compare2[cm->lo_orderdate] << endl;
 
 	params->min_key[cm->p_partkey] = 0;
 	params->min_key[cm->c_custkey] = 0;
