@@ -1721,7 +1721,7 @@ QueryOptimizer::groupBitmapSegmentTable(int table_id, int query, bool isprofile)
 	int LEN = cm->allColumn[cm->columns_in_table[table_id][0]]->LEN;
 	int total_segment = cm->allColumn[cm->columns_in_table[table_id][0]]->total_segment;
 
-	// cout << "Table id " << table_id << endl;
+	 cout << "1 Table id : " << table_id << endl;
 	for (int i = 0; i < total_segment; i++) {
 		unsigned short temp = 0;
 
@@ -1734,7 +1734,7 @@ QueryOptimizer::groupBitmapSegmentTable(int table_id, int query, bool isprofile)
 				temp = temp | (isGPU << k);
 			}
 		}
-
+	cout << "2 Table id : " << table_id << endl;
 		int count = segment_group_count[table_id][temp];
 
 		if (skipping) {
@@ -1759,7 +1759,7 @@ QueryOptimizer::groupBitmapSegmentTable(int table_id, int query, bool isprofile)
 			}
 		}
 	}
-
+	cout << "3 Table id : " << table_id << endl;
 	for (unsigned short i = 0; i < MAX_GROUPS/2; i++) { //64 segment groups
 		if (segment_group_count[table_id][i] > 0) {
 
@@ -1790,7 +1790,7 @@ QueryOptimizer::groupBitmapSegmentTable(int table_id, int query, bool isprofile)
 
 				sg = sg >> op->columns.size();
 			}
-
+cout << "4 Table id : " << table_id << endl;
 			Operator* build_op = NULL;
 
 			for (int j = 0; j < opParsed[table_id].size(); j++) {
@@ -1814,7 +1814,7 @@ QueryOptimizer::groupBitmapSegmentTable(int table_id, int query, bool isprofile)
 			}
 
 			Operator* op = NULL;
-
+cout << "5 Table id : " << table_id << endl;
 			//TODO! FIX THIS (ONLY WORKS FOR SSB)
 			if (opGPUPipeline[table_id][i][0].size() > 0) {
 				opRoots[table_id][i] = opGPUPipeline[table_id][i][0][0];
@@ -1844,7 +1844,7 @@ QueryOptimizer::groupBitmapSegmentTable(int table_id, int query, bool isprofile)
 				}
 				op->addChild(NULL);
 			}
-
+cout << "6 Table id : " << table_id << endl;
 			// Operator* t = opRoots[table_id][i];
 			// while (t != NULL) {
 			// 	cout << "yow " << t->type << endl;
@@ -1884,9 +1884,9 @@ QueryOptimizer::groupBitmapSegmentTable(int table_id, int query, bool isprofile)
 
 		}
 	}
-
+cout << "7 Table id : " << table_id << endl;
 	//TODO!! FIX THIS (NOT ELEGANT)
-	if (table_id == 0) {
+	if (table_id == 0 || table_id == 5) {
 		for (int i = 0; i < MAX_GROUPS/2; i++) {
 			if (segment_group_count[table_id][i] > 0) {
 				for (int j = 0; j < opGPUPipeline[table_id][i][0].size(); j++) {
@@ -1924,7 +1924,7 @@ QueryOptimizer::groupBitmapSegmentTable(int table_id, int query, bool isprofile)
 	// 		delete cost;
 	// 	}
 	// }
-
+cout << "8 Table id : " << table_id << endl;
 	short count = 0;
 	for (int sg = 0; sg < MAX_GROUPS; sg++) {
 		if (segment_group_count[table_id][sg] > 0) {
