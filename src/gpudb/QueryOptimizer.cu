@@ -1879,7 +1879,7 @@ cout << "6 Table id : " << table_id << endl;
 		cout << "60 Table id : " << table_id << endl;
 			int length = segment_group_count[table_id][i] * SEGMENT_SIZE;
 			cout << "61 Table id : " << table_id << endl;
-			cout<<"check1 "<<total_segment<<endl;
+			cout<<"check1 "<<length<<endl;
 			//cout <<" check1 "<<queryGroupByColumn.size();
 			//cout <<" check2 "<<queryAggrColumn.size();
 			CostModel* cost = new CostModel(length, total_segment, 0, 0, i, table_id, this);
