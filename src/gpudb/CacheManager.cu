@@ -1212,15 +1212,37 @@ CacheManager::loadColumnToCPU() {
 
 	// h_x_key = loadColumnPinned<int>("x_key", X_LEN);
 	// h_x_id = loadColumnPinned<int>("x_id", X_LEN);
-	h_x_key = [1,2,3,4,5];
-	h_x_id = [22,23,24,25,26];
+	//h_x_key = [1,2,3,4,5];
+	h_x_key = (int *)malloc(sizeof(int)*5);
+	h_x_key[0]=1;
+	h_x_key[1]=2;
+	h_x_key[2]=3;
+	h_x_key[3]=4;
+	h_x_key[4]=5;
+
+	h_x_id = (int *)malloc(sizeof(int)*5);
+	h_x_id[0]=22;
+	h_x_id[1]=23;
+	h_x_id[2]=24;
+	h_x_id[3]=25;
+	h_x_id[4]=26;
 
 	// h_y_key = loadColumnPinned<int>("y_key", Y_LEN);
 	// h_y_id = loadColumnPinned<int>("y_id", Y_LEN);
 
-	h_y_key = [1,3,4];
-	h_y_id = [44,45,48];
-	h_y_id = loadColumnPinned<int>("y_id", Y_LEN);
+	//h_y_key = [1,3,4];
+	//h_y_id = [44,45,48];
+	h_y_key = (int *)malloc(sizeof(int)*3);
+	h_y_key[0]=1;
+	h_y_key[1]=3;
+	h_y_key[2]=4;
+
+	h_y_id = (int *)malloc(sizeof(int)*3);
+	h_y_id[0]=44;
+	h_y_id[1]=45;
+	h_y_id[2]=48;
+
+	//h_y_id = loadColumnPinned<int>("y_id", Y_LEN);
 
 	h_lo_orderkey = loadColumnPinnedSort<int>("lo_orderkey", LO_LEN);
 	h_lo_suppkey = loadColumnPinnedSort<int>("lo_suppkey", LO_LEN);
