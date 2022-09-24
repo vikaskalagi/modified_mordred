@@ -1876,10 +1876,13 @@ cout << "6 Table id : " << table_id << endl;
 				op = build_op;
 				op->addChild(NULL);
 			}
-
+		cout << "60 Table id : " << table_id << endl;
 			int length = segment_group_count[table_id][i] * SEGMENT_SIZE;
+			cout << "61 Table id : " << table_id << endl;
 			CostModel* cost = new CostModel(length, total_segment, queryGroupByColumn.size(), queryAggrColumn.size(), i, table_id, this);
+			cout << "62 Table id : " << table_id << endl;
 			cost->permute_cost();
+			cout << "63 Table id : " << table_id << endl;
 			delete cost;
 
 		}
