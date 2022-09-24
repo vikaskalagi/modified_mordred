@@ -1210,10 +1210,16 @@ CacheManager::deleteAll() {
 void
 CacheManager::loadColumnToCPU() {
 
-	h_x_key = loadColumnPinned<int>("x_key", X_LEN);
-	h_x_id = loadColumnPinned<int>("x_id", X_LEN);
-	
-	h_y_key = loadColumnPinned<int>("y_key", Y_LEN);
+	// h_x_key = loadColumnPinned<int>("x_key", X_LEN);
+	// h_x_id = loadColumnPinned<int>("x_id", X_LEN);
+	h_x_key = [1,2,3,4,5];
+	h_x_id = [22,23,24,25,26];
+
+	// h_y_key = loadColumnPinned<int>("y_key", Y_LEN);
+	// h_y_id = loadColumnPinned<int>("y_id", Y_LEN);
+
+	h_y_key = [1,3,4];
+	h_y_id = [44,45,48];
 	h_y_id = loadColumnPinned<int>("y_id", Y_LEN);
 
 	h_lo_orderkey = loadColumnPinnedSort<int>("lo_orderkey", LO_LEN);
