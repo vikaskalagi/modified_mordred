@@ -11,7 +11,7 @@ int main() {
 	CUdevice device;
 	cuDeviceGet(&device, 0);
 
-	bool verbose = 0;
+	bool verbose = 1;
 
 	srand(123);
 
