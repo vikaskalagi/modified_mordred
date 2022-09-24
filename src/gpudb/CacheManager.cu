@@ -1246,8 +1246,6 @@ CacheManager::loadColumnToCPU() {
 	h_d_year = loadColumnPinned<int>("d_year", D_LEN);
 	h_d_yearmonthnum = loadColumnPinned<int>("d_yearmonthnum", D_LEN);
 
-	
-	
 	lo_orderkey = new ColumnInfo("lo_orderkey", "lo", LO_LEN, 0, 0, h_lo_orderkey);
 	lo_suppkey = new ColumnInfo("lo_suppkey", "lo", LO_LEN, 1, 0, h_lo_suppkey);
 	lo_custkey = new ColumnInfo("lo_custkey", "lo", LO_LEN, 2, 0, h_lo_custkey);
@@ -1362,6 +1360,12 @@ CacheManager::~CacheManager() {
 	CubDebugExit(cudaFreeHost(h_d_year));
 	CubDebugExit(cudaFreeHost(h_d_yearmonthnum));
 
+	CubDebugExit(cudaFreeHost(h_x_key));
+	CubDebugExit(cudaFreeHost(h_x_id));
+
+	CubDebugExit(cudaFreeHost(h_y_key));
+	CubDebugExit(cudaFreeHost(h_y_id));
+
 	delete lo_orderkey;
 	delete lo_orderdate;
 	delete lo_custkey;
@@ -1391,6 +1395,12 @@ CacheManager::~CacheManager() {
 	delete d_datekey;
 	delete d_year;
 	delete d_yearmonthnum;
+
+	delete x_key;
+	delete x_id;
+
+	delete y_key;
+	delete y_id;
 
 	for (int i = 0; i < TOT_COLUMN; i++) {
 		CubDebugExit(cudaFreeHost(segment_list[i]));

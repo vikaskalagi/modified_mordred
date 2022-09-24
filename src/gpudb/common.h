@@ -30,7 +30,7 @@ using namespace tbb;
 #define SF 1
 #define NUM_EVENTS 2
 
-#define BASE_PATH "/home/ubuntu/Implementation-GPUDB/test/ssb/data/"
+#define BASE_PATH "/home/vikas/vikas/paper_code/modified_mordred/test/ssb/data/"
 
 #if SF == 1
 #define DATA_DIR BASE_PATH "s1_columnar/"

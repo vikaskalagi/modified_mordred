@@ -1,6 +1,6 @@
-export SAMPLE_PATH="/home/ubuntu/Implementation-GPUDB/test/ssb/data/s160"
+export SAMPLE_PATH="/home/vikas/vikas/paper_code/modified_mordred/test/ssb/data/s160"
 export MAPD_DATA="data/mapd_import/ssb/"
-export QUERIES="/home/ubuntu/Implementation-GPUDB/test/ssb/queries/transformed"
+export QUERIES="/home/vikas/vikas/paper_code/modified_mordred/test/ssb/queries/transformed"
 
 ./bin/omnisci_server --num-gpus=1 --enable-cpu-sub-tasks=1
 
@@ -13,7 +13,7 @@ ln $SAMPLE_PATH/supplier.tbl.p $MAPD_DATA/supplier.tbl.p
 ln $SAMPLE_PATH/date.tbl $MAPD_DATA/date.tbl
 ln $SAMPLE_PATH/lineorder.tbl $MAPD_DATA/lineorder.tbl
 
-./bin/omnisql omnisci -u admin -p HyperInteractive --port 6274 < /home/ubuntu/Implementation-GPUDB/test/ssb/ssb_table2.sql
+./bin/omnisql omnisci -u admin -p HyperInteractive --port 6274 < /home/vikas/vikas/paper_code/modified_mordred/test/ssb/ssb_table2.sql
 
 echo "copy customer from '$MAPD_DATA/customer.tbl.p' with (delimiter='|');" | ./bin/omnisql omnisci -u admin -p HyperInteractive --port 6274
 echo "copy part from '$MAPD_DATA/part.tbl.p' with (delimiter='|');" | ./bin/omnisql omnisci -u admin -p HyperInteractive --port 6274
