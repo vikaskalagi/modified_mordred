@@ -23,7 +23,7 @@ def gen_data(dataset, scale_factor):
 
 def transform(dataset, scale_factor):
     path = './' + dataset + '/loader/'
-    ip = '../data/s%d/' % scale_factor
+    ip = '../data/s%d' % scale_factor
     op = '../data/s%d_columnar/' % scale_factor
     with cd(path):
         os.system('mkdir -p %s' % op)
