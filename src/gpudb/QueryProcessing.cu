@@ -2241,7 +2241,12 @@ QueryProcessing::processQuery(CUcontext ctx) {
     cout << "prepareOperatorPlacement Time: " << time << endl;
     cout << endl;
   }
-  qo->groupBitmapSegmentTable(0, query);
+  if (query == 53){
+    qo->groupBitmapSegmentTable(5, query);
+  }
+  else{
+    qo->groupBitmapSegmentTable(0, query);
+  }
   if (verbose) {
     cout << "groupBitmapSegmentTable Time: " << time << endl;
     cout << endl;
