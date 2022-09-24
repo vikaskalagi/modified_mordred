@@ -157,6 +157,23 @@ CacheManager::readSegmentMinMax() {
 	for (int i = 0; i < TOT_COLUMN; i++) {
 		string line;
 		cout<<DATA_DIR<<" "<<allColumn[i]->column_name<<" \n";
+		if(allColumn[i]->column_name == "x_key"){
+			segment_min[i][0]=1;
+			segment_max[i][0]=5;
+			continue;
+		}else if(allColumn[i]->column_name == "x_id"){
+			segment_min[i][0]=22;
+			segment_max[i][0]=26;
+			continue;
+		}else if(allColumn[i]->column_name == "y_key"){
+			segment_min[i][0]=1;
+			segment_max[i][0]=4;
+			continue;
+		}else if(allColumn[i]->column_name == "y_id"){
+			segment_min[i][0]=44;
+			segment_max[i][0]=48;
+			continue;
+		}
 		ifstream myfile (DATA_DIR + allColumn[i]->column_name + "minmax");
 		if (myfile.is_open()) {
 			int segment_idx = 0;
