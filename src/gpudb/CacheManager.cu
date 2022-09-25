@@ -163,8 +163,8 @@ CacheManager::readSegmentMinMax() {
 			continue;
 		}
 		if(allColumn[i]->column_name == "lo_orderdate"){
-			segment_min[i][0]=199401;
-			segment_max[i][0]=199401;
+			segment_min[i][0]=19940101;
+			segment_max[i][0]=19940101;
 			continue;
 		}
 		if(allColumn[i]->column_name == "d_yearmonthnum"){
@@ -178,8 +178,8 @@ CacheManager::readSegmentMinMax() {
 			continue;
 		}
 		if(allColumn[i]->column_name == "d_datekey"){
-			segment_min[i][0]=199401;
-			segment_max[i][0]=199401;
+			segment_min[i][0]=19940101;
+			segment_max[i][0]=19940101;
 			continue;
 		}
 		
@@ -1280,11 +1280,11 @@ CacheManager::loadColumnToCPU() {
 		cout<<h_d_datekey[ui] <<" "<<h_d_yearmonthnum[ui]<<" datakey table data\n";
 	}
 
-	h_lo_orderdate[0] = 199401;
-	h_lo_orderdate[1] = 199401;
-	h_lo_orderdate[2] = 199401;
-	h_lo_orderdate[3] = 199401;
-	h_lo_orderdate[4] = 199401;
+	h_lo_orderdate[0] = 19940101;
+	h_lo_orderdate[1] = 19940101;
+	h_lo_orderdate[2] = 19940101;
+	h_lo_orderdate[3] = 19940101;
+	h_lo_orderdate[4] = 19940101;
 
 	h_lo_discount[0] = 4;
 	h_lo_discount[1] = 5;
@@ -1304,9 +1304,9 @@ CacheManager::loadColumnToCPU() {
 	h_lo_extendedprice[3] = 2;
 	h_lo_extendedprice[4] = 3;
 
-	h_d_datekey[0] = 199401;
-	h_d_datekey[1] = 199401;
-	h_d_datekey[2] = 199401;
+	h_d_datekey[0] = 19940101;
+	h_d_datekey[1] = 19940101;
+	h_d_datekey[2] = 19940101;
 
 	h_d_yearmonthnum[0] = 199401;
 	h_d_yearmonthnum[1] = 199401;
