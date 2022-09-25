@@ -1292,11 +1292,11 @@ CacheManager::loadColumnToCPU() {
 	h_lo_discount[3] = 5;
 	h_lo_discount[4] = 6;
 
-	h_lo_quantity[0] = 30;
-	h_lo_quantity[1] = 30;
+	h_lo_quantity[0] = 22;
+	h_lo_quantity[1] = 22;
 	h_lo_quantity[2] = 30;
-	h_lo_quantity[3] = 30;
-	h_lo_quantity[4] = 30;
+	h_lo_quantity[3] = 22;
+	h_lo_quantity[4] = 22;
 
 	h_lo_extendedprice[0] = 1;
 	h_lo_extendedprice[1] = 2;
