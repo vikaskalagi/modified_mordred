@@ -1663,7 +1663,7 @@ CPUGPUProcessing::call_bfilter_build_CPU(QueryParams* params, int* &h_off_col, i
   int* group_ptr = NULL, *filter_ptr = NULL;
 
   for (int i = 0; i < qo->join.size(); i++) {
-    cout << " table id : "<<o->join[i].second->table_id<<" compare with : "<<table<<"\n";
+    cout << " table id : "<<qo->join[i].second->table_id<<" compare with : "<<table<<"\n";
     if (qo->join[i].second->table_id == table) {
       column = qo->join[i].second; break;
     }
