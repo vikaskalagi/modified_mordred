@@ -1795,6 +1795,7 @@ cout << "4 Table id : " << table_id << endl;
 
 			for (int j = 0; j < opParsed[table_id].size(); j++) {
 				Operator* op = opParsed[table_id][j];
+				cout<<op->type <<" type \n";
 				if (op->type != Aggr && op->type != GroupBy && op->type != Build) {
 					if (op->device == GPU) {
 						opGPUPipeline[table_id][i][0].push_back(op);
