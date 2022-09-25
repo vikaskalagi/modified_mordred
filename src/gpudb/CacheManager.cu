@@ -1281,8 +1281,8 @@ CacheManager::loadColumnToCPU() {
 	}
 
 	h_lo_orderdate[0] = 19940101;
-	h_lo_orderdate[1] = 19940101;
-	h_lo_orderdate[2] = 19950101;
+	h_lo_orderdate[1] = 19940103;
+	h_lo_orderdate[2] = 19940101;
 	h_lo_orderdate[3] = 19950101;
 	h_lo_orderdate[4] = 19950101;
 
