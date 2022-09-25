@@ -20,6 +20,9 @@ QueryOptimizer::QueryOptimizer(size_t _cache_size, size_t _ondemand_size, size_t
 	pkey_fkey[cm->x_key] = cm->y_key;
 	fkey_pkey[cm->y_key] = cm->x_key;
 
+	pkey_fkey[cm->y_key] = cm->x_key;
+	fkey_pkey[cm->x_key] = cm->y_key;
+
 	speedup_segment = new double*[cm->TOT_COLUMN];
 	for (int i = 0; i < cm->TOT_COLUMN; i++) {
 		speedup_segment[i] = new double[cm->allColumn[i]->total_segment];
