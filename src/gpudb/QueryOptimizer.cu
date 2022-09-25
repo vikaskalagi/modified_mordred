@@ -178,21 +178,21 @@ QueryOptimizer::parseQuery11() {
 
   queryColumn.resize(cm->TOT_TABLE);
   //queryColumn[0].push_back(cm->lo_discount);
-  //queryColumn[0].push_back(cm->lo_quantity);
+  queryColumn[0].push_back(cm->lo_quantity);
   queryColumn[0].push_back(cm->lo_orderdate);
   //queryColumn[0].push_back(cm->lo_extendedprice);
   //queryColumn[0].push_back(cm->lo_discount);
-  queryColumn[2].push_back(cm->c_nation);
+  //queryColumn[2].push_back(cm->c_nation);
   queryColumn[4].push_back(cm->d_year);
   queryColumn[4].push_back(cm->d_datekey);
 
-	//querySelectColumn.push_back(cm->lo_discount);
-	//querySelectColumn.push_back(cm->lo_quantity);
-	//querySelectColumn.push_back(cm->d_year);
+	//querySelectColumn.push_back(cm->c_nation);
+	querySelectColumn.push_back(cm->lo_quantity);
+	querySelectColumn.push_back(cm->d_year);
 	queryBuildColumn.push_back(cm->d_datekey);
 	queryProbeColumn.push_back(cm->lo_orderdate);
-	queryGroupByColumn.push_back(cm->d_year);
-	queryGroupByColumn.push_back(cm->c_nation);
+	//queryGroupByColumn.push_back(cm->d_year);
+	//queryGroupByColumn.push_back(cm->c_nation);
 	//queryAggrColumn.push_back(cm->lo_extendedprice);
 	//queryAggrColumn.push_back(cm->lo_discount);
 
@@ -203,7 +203,7 @@ QueryOptimizer::parseQuery11() {
 	// aggregation[cm->lo_orderdate].push_back(cm->lo_discount);
 
 	//groupby_build[cm->lo_orderdate].push_back(cm->c_nation);
-	groupby_build[cm->d_datekey].push_back(cm->d_year);
+	//groupby_build[cm->d_datekey].push_back(cm->d_year);
 	//select_probe[cm->lo_orderdate].push_back(cm->lo_quantity);
 	//select_probe[cm->lo_orderdate].push_back(cm->lo_discount);
 
@@ -228,11 +228,11 @@ QueryOptimizer::parseQuery11() {
 	// op->columns.push_back(cm->lo_extendedprice);
 	// op->columns.push_back(cm->lo_discount);
 	// opParsed[0].push_back(op);
-	op = new Operator (CPU, 0, 2, GroupBy);
+	//op = new Operator (CPU, 0, 2, GroupBy);
 	//op->columns.push_back(cm->lo_revenue);
-	op->columns.push_back(cm->c_nation);
-	op->supporting_columns.push_back(cm->d_year);
-	opParsed[2].push_back(op);
+	// op->columns.push_back(cm->c_nation);
+	// op->supporting_columns.push_back(cm->d_year);
+	// opParsed[2].push_back(op);
 
 
 	// op = new Operator (CPU, 0, 4, Filter);
@@ -2721,12 +2721,12 @@ QueryOptimizer::prepareQuery(int query, Distribution dist) {
 		params->h_group_func = &host_mul_func;
 
 		params->unique_val[cm->p_partkey] = 0;
-		params->unique_val[cm->c_custkey] = 3;
+		params->unique_val[cm->c_custkey] = 0;
 		params->unique_val[cm->s_suppkey] = 0;
 		params->unique_val[cm->d_datekey] = 3;
 
 		params->dim_len[cm->p_partkey] = 0;
-		params->dim_len[cm->c_custkey] = C_LEN;
+		params->dim_len[cm->c_custkey] = 0;
 		params->dim_len[cm->s_suppkey] = 0;
 		params->dim_len[cm->d_datekey] = 19981230 - 19920101 + 1;
 
