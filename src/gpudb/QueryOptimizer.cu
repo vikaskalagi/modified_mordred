@@ -1762,7 +1762,7 @@ QueryOptimizer::groupBitmapSegmentTable(int table_id, int query, bool isprofile)
 	cout << "3 Table id : " << table_id << endl;
 	for (unsigned short i = 0; i < MAX_GROUPS/2; i++) { //64 segment groups
 		if (segment_group_count[table_id][i] > 0) {
-
+			cout<< i<<" segmentgout greater "<< segment_group_count[table_id][i]<<"\n";
 			unsigned short sg = i;
 
 			for (int j = opParsed[table_id].size()-1; j >= 0; j--) {
