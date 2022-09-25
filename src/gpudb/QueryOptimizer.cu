@@ -201,8 +201,8 @@ QueryOptimizer::parseQuery11() {
 	// aggregation[cm->lo_orderdate].push_back(cm->lo_extendedprice);
 	// aggregation[cm->lo_orderdate].push_back(cm->lo_discount);
 
-	groupby_build[cm->lo_orderdate].push_back(cm->lo_discount);
-	groupby_build[cm->d_datekey].push_back(cm->d_year);
+	//groupby_build[cm->lo_orderdate].push_back(cm->lo_discount);
+	//groupby_build[cm->d_datekey].push_back(cm->d_year);
 	//select_probe[cm->lo_orderdate].push_back(cm->lo_quantity);
 	//select_probe[cm->lo_orderdate].push_back(cm->lo_discount);
 
@@ -2722,14 +2722,14 @@ QueryOptimizer::prepareQuery(int query, Distribution dist) {
 		params->unique_val[cm->p_partkey] = 0;
 		params->unique_val[cm->c_custkey] = 0;
 		params->unique_val[cm->s_suppkey] = 0;
-		params->unique_val[cm->d_datekey] = 3;
+		params->unique_val[cm->d_datekey] = 1;
 
 		params->dim_len[cm->p_partkey] = 0;
 		params->dim_len[cm->c_custkey] = 0;
 		params->dim_len[cm->s_suppkey] = 0;
 		params->dim_len[cm->d_datekey] = 19981230 - 19920101 + 1;
 
-		params->total_val = 10;
+		params->total_val = 5;
 
 		float time;
 		SETUP_TIMING();
