@@ -2722,7 +2722,7 @@ QueryOptimizer::prepareQuery(int query, Distribution dist) {
 		params->unique_val[cm->p_partkey] = 0;
 		params->unique_val[cm->c_custkey] = 0;
 		params->unique_val[cm->s_suppkey] = 0;
-		params->unique_val[cm->d_datekey] = 1;
+		params->unique_val[cm->d_datekey] = 3;
 
 		params->dim_len[cm->p_partkey] = 0;
 		params->dim_len[cm->c_custkey] = 0;
