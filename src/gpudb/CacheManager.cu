@@ -1272,6 +1272,12 @@ CacheManager::loadColumnToCPU() {
 	d_year = new ColumnInfo("d_year", "d", D_LEN, 23, 4, h_d_year);
 	d_yearmonthnum = new ColumnInfo("d_yearmonthnum", "d", D_LEN, 24, 4, h_d_yearmonthnum);
 
+	for(int ui=0;ui<LO_LEN;ui++){
+		cout<<h_lo_orderdate[ui]<<" "<<h_lo_discount<<" "<<h_lo_extendedprice<<" lo table data\n";
+	}
+	for(int ui=0;ui<D_LEN;ui++){
+		cout<<h_d_datekey <<" datakey table data\n";
+	}
 	allColumn[0] = lo_orderkey;
 	allColumn[1] = lo_suppkey;
 	allColumn[2] = lo_custkey;
