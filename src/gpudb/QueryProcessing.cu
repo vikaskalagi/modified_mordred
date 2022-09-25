@@ -118,7 +118,7 @@ QueryProcessing::executeTableDim(int table_id, int sg) {
     else CubDebugExit(cudaMalloc((void**) &d_total, 1 * sizeof(int)));
 
     // cout << "dim " << sg << endl;
-    cout << qo->joinCPUcheck[table_id] << " check join : "<< qo->joinGPUcheck[table_id]<<"\n";
+    //cout << qo->joinCPUcheck[table_id] << " check join : "<< qo->joinGPUcheck[table_id]<<"\n";
     if (sg == 0 || sg == 1) {
 
       if (qo->joinCPUcheck[table_id] && qo->joinGPUcheck[table_id]) {
@@ -210,7 +210,7 @@ QueryProcessing::executeTableFact_v1(int sg) {
     else CubDebugExit(cudaMalloc((void**) &d_total, 1 * sizeof(int)));
 
     // printf("fact sg = %d\n", sg);
-
+    cout << "queryprocess.cu 213 line: "<<qo->selectCPUPipelineCol[sg].size() << " "<<qo->selectGPUPipelineCol[sg].size()<<" "<<qo->joinGPUPipelineCol[sg].size()<<" "<<qo->joinCPUPipelineCol[sg].size()<<" "<<qo->groupbyGPUPipelineCol[sg].size()<<"\n";
     if (qo->selectCPUPipelineCol[sg].size() > 0) {
       if (qo->selectGPUPipelineCol[sg].size() > 0 && qo->joinGPUPipelineCol[sg].size() > 0) {
         if (qo->joinCPUPipelineCol[sg].size() == 0 && qo->groupbyGPUPipelineCol[sg].size() > 0) {
