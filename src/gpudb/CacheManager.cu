@@ -1305,8 +1305,8 @@ CacheManager::loadColumnToCPU() {
 	h_lo_extendedprice[4] = 3;
 
 	h_d_datekey[0] = 19940101;
-	h_d_datekey[1] = 19940101;
-	h_d_datekey[2] = 19940101;
+	h_d_datekey[1] = 19940102;
+	h_d_datekey[2] = 19940103;
 
 	h_d_yearmonthnum[0] = 199401;
 	h_d_yearmonthnum[1] = 199401;
