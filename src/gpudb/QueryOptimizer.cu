@@ -2729,7 +2729,7 @@ QueryOptimizer::prepareQuery(int query, Distribution dist) {
 		params->dim_len[cm->s_suppkey] = 0;
 		params->dim_len[cm->d_datekey] = 19981230 - 19920101 + 1;
 
-		params->total_val = 5;
+		params->total_val = 50;
 
 		float time;
 		SETUP_TIMING();
