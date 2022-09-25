@@ -273,7 +273,7 @@ QueryOptimizer::parseQuery53() {
 	op->supporting_columns.push_back(cm->y_key);
 	opParsed[5].push_back(op);
 
-	op = new Operator (CPU, 0, 0, Aggr);
+	op = new Operator (CPU, 0, 5, Aggr);
 	op->columns.push_back(cm->x_id);
 	op->columns.push_back(cm->y_id);
 	opParsed[5].push_back(op);
