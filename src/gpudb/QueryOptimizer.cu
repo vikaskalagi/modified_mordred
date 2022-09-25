@@ -2558,12 +2558,12 @@ QueryOptimizer::prepareQuery(int query, Distribution dist) {
 		if (query == 11) {
 			// params->selectivity[cm->d_year] = 1;
 			params->selectivity[cm->lo_orderdate] = 1;
-			 params->selectivity[cm->lo_discount] = 3.0/11 * 1.5;
+			 //params->selectivity[cm->lo_discount] = 3.0/11 * 1.5;
 			// params->selectivity[cm->lo_quantity] = 0.5 * 1.5;
 
 			// params->real_selectivity[cm->d_year] = 1.0/8;
 			params->real_selectivity[cm->lo_orderdate] = 1;
-			 params->real_selectivity[cm->lo_discount] = 3.0/11;
+			// params->real_selectivity[cm->lo_discount] = 3.0/11;
 			// params->real_selectivity[cm->lo_quantity] = 0.5;
 
 			// params->compare1[cm->lo_discount] = 1;
@@ -2711,7 +2711,7 @@ QueryOptimizer::prepareQuery(int query, Distribution dist) {
 		params->unique_val[cm->p_partkey] = 0;
 		params->unique_val[cm->c_custkey] = 0;
 		params->unique_val[cm->s_suppkey] = 0;
-		params->unique_val[cm->d_datekey] = 1;
+		params->unique_val[cm->d_datekey] = 3;
 
 		params->dim_len[cm->p_partkey] = 0;
 		params->dim_len[cm->c_custkey] = 0;
