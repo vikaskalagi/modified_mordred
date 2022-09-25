@@ -180,7 +180,7 @@ QueryOptimizer::parseQuery11() {
   //queryColumn[0].push_back(cm->lo_discount);
   //queryColumn[0].push_back(cm->lo_quantity);
   queryColumn[0].push_back(cm->lo_orderdate);
-  queryColumn[0].push_back(cm->lo_extendedprice);
+  //queryColumn[0].push_back(cm->lo_extendedprice);
   queryColumn[0].push_back(cm->lo_discount);
   queryColumn[4].push_back(cm->d_year);
   queryColumn[4].push_back(cm->d_datekey);
@@ -201,7 +201,7 @@ QueryOptimizer::parseQuery11() {
 	// aggregation[cm->lo_orderdate].push_back(cm->lo_extendedprice);
 	// aggregation[cm->lo_orderdate].push_back(cm->lo_discount);
 
-	groupby_build[cm->p_partkey].push_back(cm->lo_discount);
+	groupby_build[cm->lo_orderdate].push_back(cm->lo_discount);
 	groupby_build[cm->d_datekey].push_back(cm->d_year);
 	//select_probe[cm->lo_orderdate].push_back(cm->lo_quantity);
 	//select_probe[cm->lo_orderdate].push_back(cm->lo_discount);
