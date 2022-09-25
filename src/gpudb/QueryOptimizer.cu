@@ -256,7 +256,8 @@ QueryOptimizer::parseQuery53() {
 	join.resize(1);
 	join[0] = pair<ColumnInfo*, ColumnInfo*> (cm->x_key, cm->y_key);
 
-
+	aggregation[cm->x_key].push_back(cm->x_id);
+	aggregation[cm->y_key].push_back(cm->y_id);
 	// select_probe[cm->lo_orderdate].push_back(cm->lo_quantity);
 	// select_probe[cm->lo_orderdate].push_back(cm->lo_discount);
 
@@ -272,6 +273,10 @@ QueryOptimizer::parseQuery53() {
 	op->supporting_columns.push_back(cm->y_key);
 	opParsed[5].push_back(op);
 
+	op = new Operator (CPU, 0, 0, Aggr);
+	op->columns.push_back(cm->x_id);
+	op->columns.push_back(cm->y_id);
+	opParsed[5].push_back(op);
 
 	op = new Operator (CPU, 0, 6, Build);
 	op->columns.push_back(cm->y_key);
@@ -2605,9 +2610,43 @@ QueryOptimizer::prepareQuery(int query, Distribution dist) {
 
 	params = new QueryParams(query);
 
-	if (query == 11 || query == 12 || query == 13) {
+	if (query == 11 || query == 12 || query == 13 || query == 53) {
+		if (query == 53) {
+			params->selectivity[cm->x_key] = 1;
+			params->real_selectivity[cm->x_key] = 1;
 
-		if (query == 11) {
+			// if (dist == Zipf) {
+			// 	zipfian[query]->generateZipf();
+			// 	params->compare1[cm->d_year] = zipfian[query]->year.first;
+			// 	params->compare2[cm->d_year] = zipfian[query]->year.second;
+			// 	params->compare1[cm->lo_orderdate] = zipfian[query]->date.first;
+			// 	params->compare2[cm->lo_orderdate] = zipfian[query]->date.second;	
+			// 	params->real_selectivity[cm->d_year] = 1.0/8;			
+			// } else if (dist == Norm) {
+			// 	normal[query]->generateNorm();
+			// 	params->compare1[cm->d_year] = normal[query]->year.first;
+			// 	params->compare2[cm->d_year] = normal[query]->year.second;
+			// 	params->compare1[cm->lo_orderdate] = normal[query]->date.first;
+			// 	params->compare2[cm->lo_orderdate] = normal[query]->date.second;	
+			// 	params->real_selectivity[cm->d_year] = (normal[query]->year.second - normal[query]->year.first + 1.0)/8;			
+			// } else {
+				// params->compare1[cm->d_year] = 1993;
+				// params->compare2[cm->d_year] = 1993;
+				 //params->compare1[cm->lo_orderdate] = 19930101;
+				 //params->compare2[cm->lo_orderdate] = 19931231;
+				 //params->total_val = 10;
+			// }
+
+			// CubDebugExit(cudaMemcpyFromSymbol(&(params->map_filter_func_dev[cm->d_year]), p_pred_eq<int, 128, 4>, sizeof(filter_func_t_dev<int, 128, 4>)));
+			// CubDebugExit(cudaMemcpyFromSymbol(&(params->map_filter_func_dev[cm->lo_discount]), p_pred_between<int, 128, 4>, sizeof(filter_func_t_dev<int, 128, 4>)));
+			// CubDebugExit(cudaMemcpyFromSymbol(&(params->map_filter_func_dev[cm->lo_quantity]), p_pred_between<int, 128, 4>, sizeof(filter_func_t_dev<int, 128, 4>)));
+
+			// params->map_filter_func_host[cm->d_year] = &host_pred_eq;
+			// params->map_filter_func_host[cm->lo_discount] = &host_pred_between;
+			// params->map_filter_func_host[cm->lo_quantity] = &host_pred_between;
+
+		}
+		else if (query == 11) {
 			params->selectivity[cm->d_year] = 1;
 			params->selectivity[cm->lo_orderdate] = 1;
 			params->selectivity[cm->lo_discount] = 3.0/11 * 1.5;
