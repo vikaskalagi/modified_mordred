@@ -1428,7 +1428,7 @@ QueryOptimizer::prepareOperatorPlacement() {
 	// segment_group_temp_count = (short**) malloc (cm->TOT_TABLE * sizeof(short*));
 	par_segment = (short**) malloc (cm->TOT_TABLE * sizeof(short*));
 	for (int i = 0; i < cm->TOT_TABLE; i++) {
-		CubDebugExit(cudaHostAlloc((void**) &(segment_group[i]), MAX_GROUPS * cm->lo_orderdate->total_segment * sizeof(short), cudaHostAllocDefault));
+		CubDebugExit(cudaHostAlloc((void**) &(segment_group[i]), MAX_GROUPS * cm->r_key->total_segment * sizeof(short), cudaHostAllocDefault));
 		segment_group_count[i] = (short*) malloc (MAX_GROUPS * sizeof(short));
 		par_segment[i] = (short*) malloc (MAX_GROUPS * sizeof(short));
 		joinGPU[i] = (bool*) malloc(MAX_GROUPS * sizeof(bool));
@@ -1879,7 +1879,7 @@ cout << "6 Table id : " << table_id << endl;
 		cout << "60 Table id : " << table_id << endl;
 			int length = segment_group_count[table_id][i] * SEGMENT_SIZE;
 			cout << "61 Table id : " << table_id << endl;
-			cout<<"check1 "<<length<<endl;
+			cout<<"check1 "<<opRoots[table_id][i]<<endl;
 			//cout <<" check1 "<<queryGroupByColumn.size();
 			//cout <<" check2 "<<queryAggrColumn.size();
 			CostModel* cost = new CostModel(length, total_segment, 0, 0, i, table_id, this);
