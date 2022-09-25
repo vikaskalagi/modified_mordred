@@ -1398,7 +1398,7 @@ QueryProcessing::runQuery(CUcontext ctx) {
 
   cudaEventRecord(start, 0);
 
-  parallel_for(short(0), qo->par_segment_count[0], [=](short i){
+  parallel_for(short(0), qo->par_segment_count[5], [=](short i){
 
     // cout << i << " of " << qo->par_segment_count[0] << endl;
 
