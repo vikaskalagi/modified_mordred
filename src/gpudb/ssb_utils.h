@@ -18,12 +18,12 @@ using namespace std;
 
 #if SF == 1
 #define DATA_DIR BASE_PATH "s1_columnar/"
-#define LO_LEN 6001171
+#define LO_LEN 5
 //#define LO_LEN 1000
-#define P_LEN 200000
-#define S_LEN 2000
-#define C_LEN 30000
-#define D_LEN 2556
+#define P_LEN 3
+#define S_LEN 3
+#define C_LEN 3
+#define D_LEN 3
 #elif SF == 10
 #define DATA_DIR BASE_PATH "s10_columnar/"
 #define LO_LEN 59986214
