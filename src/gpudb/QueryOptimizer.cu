@@ -229,8 +229,8 @@ QueryOptimizer::parseQuery11() {
 	// opParsed[0].push_back(op);
 	op = new Operator (CPU, 0, 0, GroupBy);
 	//op->columns.push_back(cm->lo_revenue);
+	op->columns.push_back(cm->lo_discount);
 	op->supporting_columns.push_back(cm->d_year);
-	op->supporting_columns.push_back(cm->lo_discount);
 	opParsed[0].push_back(op);
 
 
