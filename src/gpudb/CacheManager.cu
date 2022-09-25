@@ -1248,11 +1248,17 @@ CacheManager::loadColumnToCPU() {
 	h_lo_orderdate[3] = 2;
 	h_lo_orderdate[4] = 3;
 
-	h_lo_discount[0] = 1;
-	h_lo_discount[1] = 2;
-	h_lo_discount[2] = 1;
-	h_lo_discount[3] = 2;
-	h_lo_discount[4] = 3;
+	h_lo_discount[0] = 4;
+	h_lo_discount[1] = 5;
+	h_lo_discount[2] = 5;
+	h_lo_discount[3] = 5;
+	h_lo_discount[4] = 6;
+
+	h_lo_quantity[0] = 30;
+	h_lo_quantity[1] = 30;
+	h_lo_quantity[2] = 30;
+	h_lo_quantity[3] = 30;
+	h_lo_quantity[4] = 30;
 
 	h_lo_extendedprice[0] = 1;
 	h_lo_extendedprice[1] = 2;
@@ -1263,13 +1269,17 @@ CacheManager::loadColumnToCPU() {
 	h_d_datekey[0] = 1;
 	h_d_datekey[1] = 2;
 	h_d_datekey[2] = 3;
+
+	h_d_yearmonthnum[0] = 199401;
+	h_d_yearmonthnum[1] = 199401;
+	h_d_yearmonthnum[2] = 199401;
 	for(int ui=0;ui<LO_LEN;ui++){
 		cout<<h_lo_orderdate[ui]<<" "<<h_lo_discount[ui]<<" "<<h_lo_extendedprice[ui]<<" lo table data\n";
 	}
 	for(int ui=0;ui<D_LEN;ui++){
 		cout<<h_d_datekey[ui] <<" datakey table data\n";
 	}
-	
+
 	lo_orderkey = new ColumnInfo("lo_orderkey", "lo", LO_LEN, 0, 0, h_lo_orderkey);
 	lo_suppkey = new ColumnInfo("lo_suppkey", "lo", LO_LEN, 1, 0, h_lo_suppkey);
 	lo_custkey = new ColumnInfo("lo_custkey", "lo", LO_LEN, 2, 0, h_lo_custkey);
