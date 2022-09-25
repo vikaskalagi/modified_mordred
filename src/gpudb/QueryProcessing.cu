@@ -426,6 +426,7 @@ QueryProcessing::executeTableFact_v1(int sg) {
           else cgp->call_group_by_GPU(params, off_col, h_total, sg, streams[sg]);
 
         } else if (qo->joinCPUPipelineCol[sg].size() > 0 && qo->groupbyGPUPipelineCol[sg].size() == 0) {
+          cout << "came here 429 line in QP.cu : "<< qo->groupby_build.size() <<"\n";
           if (qo->groupby_build.size() == 0) cgp->call_probe_aggr_CPU(params, h_off_col, h_total, sg); 
           else cgp->call_probe_group_by_CPU(params, h_off_col, h_total, sg);
 
