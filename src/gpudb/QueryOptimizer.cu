@@ -2721,7 +2721,7 @@ QueryOptimizer::prepareQuery(int query, Distribution dist) {
 		params->h_group_func = &host_mul_func;
 
 		params->unique_val[cm->p_partkey] = 0;
-		params->unique_val[cm->c_custkey] = 5;
+		params->unique_val[cm->c_custkey] = 3;
 		params->unique_val[cm->s_suppkey] = 0;
 		params->unique_val[cm->d_datekey] = 3;
 
