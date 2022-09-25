@@ -2595,7 +2595,8 @@ QueryOptimizer::prepareQuery(int query, Distribution dist) {
 			// 	params->compare1[cm->lo_orderdate] = 19930101;
 			// 	params->compare2[cm->lo_orderdate] = 19931231;
 			// }
-
+			params->compare1[cm->lo_orderdate] = 19920101;
+			params->compare2[cm->lo_orderdate] = 19981231;
 			// CubDebugExit(cudaMemcpyFromSymbol(&(params->map_filter_func_dev[cm->d_year]), p_pred_eq<int, 128, 4>, sizeof(filter_func_t_dev<int, 128, 4>)));
 			// CubDebugExit(cudaMemcpyFromSymbol(&(params->map_filter_func_dev[cm->lo_discount]), p_pred_between<int, 128, 4>, sizeof(filter_func_t_dev<int, 128, 4>)));
 			// CubDebugExit(cudaMemcpyFromSymbol(&(params->map_filter_func_dev[cm->lo_quantity]), p_pred_between<int, 128, 4>, sizeof(filter_func_t_dev<int, 128, 4>)));
@@ -2644,9 +2645,9 @@ QueryOptimizer::prepareQuery(int query, Distribution dist) {
 				params->compare2[cm->d_yearmonthnum] = 199401;
 				params->compare1[cm->lo_orderdate] = 19940101;
 				params->compare2[cm->lo_orderdate] = 19940131;
-				cout << " 0 check Query: " << query << " " << params->compare1[cm->lo_orderdate] << " " << params->compare2[cm->lo_orderdate] << endl;
+				//cout << " 0 check Query: " << query << " " << params->compare1[cm->lo_orderdate] << " " << params->compare2[cm->lo_orderdate] << endl;
 			}
-			cout << " 1 check Query: " << query << " " << params->compare1[cm->lo_orderdate] << " " << params->compare2[cm->lo_orderdate] << endl;
+			//cout << " 1 check Query: " << query << " " << params->compare1[cm->lo_orderdate] << " " << params->compare2[cm->lo_orderdate] << endl;
 			CubDebugExit(cudaMemcpyFromSymbol(&(params->map_filter_func_dev[cm->d_yearmonthnum]), p_pred_eq<int, 128, 4>, sizeof(filter_func_t_dev<int, 128, 4>)));
 			CubDebugExit(cudaMemcpyFromSymbol(&(params->map_filter_func_dev[cm->lo_discount]), p_pred_between<int, 128, 4>, sizeof(filter_func_t_dev<int, 128, 4>)));
 			CubDebugExit(cudaMemcpyFromSymbol(&(params->map_filter_func_dev[cm->lo_quantity]), p_pred_between<int, 128, 4>, sizeof(filter_func_t_dev<int, 128, 4>)));
@@ -2654,7 +2655,7 @@ QueryOptimizer::prepareQuery(int query, Distribution dist) {
 			params->map_filter_func_host[cm->d_yearmonthnum] = &host_pred_eq;
 			params->map_filter_func_host[cm->lo_discount] = &host_pred_between;
 			params->map_filter_func_host[cm->lo_quantity] = &host_pred_between;
-			cout << " Query: " << query << " " << params->compare1[cm->lo_orderdate] << " " << params->compare2[cm->lo_orderdate] << endl;
+			//cout << " Query: " << query << " " << params->compare1[cm->lo_orderdate] << " " << params->compare2[cm->lo_orderdate] << endl;
 		} else if (query == 13) {
 
 			params->selectivity[cm->d_datekey] = 1;
