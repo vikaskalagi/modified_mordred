@@ -44,7 +44,7 @@ int main() {
 	double malloc_time_total1 = 0, execution_time1 = 0, optimization_time1 = 0, merging_time1 = 0;
 	double malloc_time_total2 = 0, execution_time2 = 0, optimization_time2 = 0, merging_time2 = 0;
 	double repl_time = 0;
-	Distribution dist = Zipf;
+	Distribution dist = None;
 	string dist_string;
 	FILE *fptr, *fptr2;
 	if (dist == Norm) dist_string = "Norm";
