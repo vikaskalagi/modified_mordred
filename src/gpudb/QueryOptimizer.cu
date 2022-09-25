@@ -1814,7 +1814,7 @@ cout << "4 Table id : " << table_id << endl;
 			}
 
 			Operator* op = NULL;
-cout << "5 Table id : " << opGPUPipeline[table_id][i][0].size()<< endl;
+cout << "5 Table id : " << opGPUPipeline[table_id][i][0].size()<<" cpu: "<<opCPUPipeline[table_id][i][0].size()<< endl;
 			//TODO! FIX THIS (ONLY WORKS FOR SSB)
 			if (opGPUPipeline[table_id][i][0].size() > 0) {
 				opRoots[table_id][i] = opGPUPipeline[table_id][i][0][0];
