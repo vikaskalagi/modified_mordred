@@ -1319,7 +1319,7 @@ CacheManager::loadColumnToCPU() {
 		cout<<h_lo_orderdate[ui]<<" "<<h_lo_discount[ui]<<" "<<h_lo_extendedprice[ui]<<" lo table data\n";
 	}
 	for(int ui=0;ui<D_LEN;ui++){
-		cout<<h_d_datekey[ui]<<" "<<h_d_year[ui] <<" datakey table data\n";
+		cout<<h_d_datekey[ui]<<" "<<h_d_year[ui]<<h_c_nation[ui] <<" datakey table data\n";
 	}
 
 	lo_orderkey = new ColumnInfo("lo_orderkey", "lo", LO_LEN, 0, 0, h_lo_orderkey);
