@@ -118,7 +118,7 @@ QueryProcessing::executeTableDim(int table_id, int sg) {
     else CubDebugExit(cudaMalloc((void**) &d_total, 1 * sizeof(int)));
 
     // cout << "dim " << sg << endl;
-
+    cout << qo->joinCPUcheck[table_id] << " check join : "<< qo->joinGPUcheck[table_id]<<"\n";
     if (sg == 0 || sg == 1) {
 
       if (qo->joinCPUcheck[table_id] && qo->joinGPUcheck[table_id]) {

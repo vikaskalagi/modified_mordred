@@ -1433,7 +1433,7 @@ QueryOptimizer::prepareOperatorPlacement() {
 	// segment_group_temp_count = (short**) malloc (cm->TOT_TABLE * sizeof(short*));
 	par_segment = (short**) malloc (cm->TOT_TABLE * sizeof(short*));
 	for (int i = 0; i < cm->TOT_TABLE; i++) {
-		CubDebugExit(cudaHostAlloc((void**) &(segment_group[i]), MAX_GROUPS * cm->x_key->total_segment * sizeof(short), cudaHostAllocDefault));
+		CubDebugExit(cudaHostAlloc((void**) &(segment_group[i]), MAX_GROUPS * cm->lo_orderdate->total_segment * sizeof(short), cudaHostAllocDefault));
 		segment_group_count[i] = (short*) malloc (MAX_GROUPS * sizeof(short));
 		par_segment[i] = (short*) malloc (MAX_GROUPS * sizeof(short));
 		joinGPU[i] = (bool*) malloc(MAX_GROUPS * sizeof(bool));
