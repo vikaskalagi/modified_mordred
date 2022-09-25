@@ -193,7 +193,7 @@ QueryOptimizer::parseQuery11() {
 	queryGroupByColumn.push_back(cm->d_year);
 	queryGroupByColumn.push_back(cm->lo_discount);
 	//queryAggrColumn.push_back(cm->lo_extendedprice);
-	queryAggrColumn.push_back(cm->lo_discount);
+	//queryAggrColumn.push_back(cm->lo_discount);
 
 	join.resize(1);
 	join[0] = pair<ColumnInfo*, ColumnInfo*> (cm->lo_orderdate, cm->d_datekey);
