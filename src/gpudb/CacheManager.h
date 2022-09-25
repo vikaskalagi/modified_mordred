@@ -161,16 +161,12 @@ public:
 	int *h_s_suppkey, *h_s_nation, *h_s_region, *h_s_city;
 	int *h_p_partkey, *h_p_brand1, *h_p_category, *h_p_mfgr;
 	int *h_d_datekey, *h_d_year, *h_d_yearmonthnum;
-	int *h_x_key, *h_x_id;
-	int *h_y_key,*h_y_id;
 
 	ColumnInfo *lo_orderkey, *lo_orderdate, *lo_custkey, *lo_suppkey, *lo_partkey, *lo_revenue, *lo_discount, *lo_quantity, *lo_extendedprice, *lo_supplycost;
 	ColumnInfo *c_custkey, *c_nation, *c_region, *c_city;
 	ColumnInfo *s_suppkey, *s_nation, *s_region, *s_city;
 	ColumnInfo *p_partkey, *p_brand1, *p_category, *p_mfgr;
 	ColumnInfo *d_datekey, *d_year, *d_yearmonthnum;
-	ColumnInfo *x_key, *x_id;
-	ColumnInfo *y_key, *y_id;
 
 	CacheManager(size_t cache_size, size_t ondemand_size, size_t _processing_size, size_t _pinned_memsize);
 

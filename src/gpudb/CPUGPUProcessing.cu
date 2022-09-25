@@ -1663,7 +1663,6 @@ CPUGPUProcessing::call_bfilter_build_CPU(QueryParams* params, int* &h_off_col, i
   int* group_ptr = NULL, *filter_ptr = NULL;
 
   for (int i = 0; i < qo->join.size(); i++) {
-    //cout << " table id : "<<qo->join[i].second->table_id<<" compare with : "<<table<<"\n";
     if (qo->join[i].second->table_id == table) {
       column = qo->join[i].second; break;
     }
@@ -2319,10 +2318,9 @@ CPUGPUProcessing::call_probe_aggr_CPU(QueryParams* params, int** &h_off_col, int
   int _min_key[4] = {0}, _dim_len[4] = {0};
   int *ht[4] = {}, *fkey_col[4] = {};
   int *aggr_col[2] = {};
-  cout<< "2322 in CGPro.cu : "<<qo->joinCPUPipelineCol[sg].size()<<"\n";
+
   for (int i = 0; i < qo->joinCPUPipelineCol[sg].size(); i++) {
     ColumnInfo* column = qo->joinCPUPipelineCol[sg][i];
-    cout<< column->column_name <<" Fkey Pkey:\n";
     int table_id = qo->fkey_pkey[column]->table_id;
     fkey_col[table_id - 1] = column->col_ptr;
     ColumnInfo* pkey = qo->fkey_pkey[column];
@@ -2330,7 +2328,7 @@ CPUGPUProcessing::call_probe_aggr_CPU(QueryParams* params, int** &h_off_col, int
     _min_key[table_id - 1] = params->min_key[pkey];
     _dim_len[table_id - 1] = params->dim_len[pkey];
   }
-  cout<< "2332 in CGPro.cu : "<<qo->aggregation[cm->lo_orderdate].size()<<"\n";
+
   for (int i = 0; i < qo->aggregation[cm->lo_orderdate].size(); i++) {
     ColumnInfo* column = qo->aggregation[cm->lo_orderdate][i];
     aggr_col[i] = column->col_ptr;

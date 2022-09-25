@@ -38,8 +38,8 @@ CacheManager::CacheManager(size_t _cache_size, size_t _ondemand_size, size_t _pr
 	ondemand_segment = _ondemand_size/SEGMENT_SIZE;
 	processing_size = _processing_size;
 	pinned_memsize = _pinned_memsize;
-	TOT_COLUMN = 29;
-	TOT_TABLE = 7;
+	TOT_COLUMN = 25;
+	TOT_TABLE = 5;
 
 	CubDebugExit(cudaMalloc((void**) &gpuCache, (cache_size + ondemand_size) * sizeof(int)));
 	CubDebugExit(cudaMemset(gpuCache, 0, (cache_size + ondemand_size) * sizeof(int)));
@@ -156,24 +156,6 @@ CacheManager::readSegmentMinMax() {
 
 	for (int i = 0; i < TOT_COLUMN; i++) {
 		string line;
-		cout<<DATA_DIR<<" "<<allColumn[i]->column_name<<" \n";
-		if(allColumn[i]->column_name == "x_key"){
-			segment_min[i][0]=1;
-			segment_max[i][0]=5;
-			continue;
-		}else if(allColumn[i]->column_name == "x_id"){
-			segment_min[i][0]=22;
-			segment_max[i][0]=26;
-			continue;
-		}else if(allColumn[i]->column_name == "y_key"){
-			segment_min[i][0]=1;
-			segment_max[i][0]=4;
-			continue;
-		}else if(allColumn[i]->column_name == "y_id"){
-			segment_min[i][0]=44;
-			segment_max[i][0]=48;
-			continue;
-		}
 		ifstream myfile (DATA_DIR + allColumn[i]->column_name + "minmax");
 		if (myfile.is_open()) {
 			int segment_idx = 0;
@@ -1228,40 +1210,6 @@ CacheManager::deleteAll() {
 void
 CacheManager::loadColumnToCPU() {
 
-	// h_x_key = loadColumnPinned<int>("x_key", X_LEN);
-	// h_x_id = loadColumnPinned<int>("x_id", X_LEN);
-	//h_x_key = [1,2,3,4,5];
-	h_x_key = (int *)malloc(sizeof(int)*5);
-	h_x_key[0]=1;
-	h_x_key[1]=2;
-	h_x_key[2]=3;
-	h_x_key[3]=4;
-	h_x_key[4]=5;
-
-	h_x_id = (int *)malloc(sizeof(int)*5);
-	h_x_id[0]=22;
-	h_x_id[1]=23;
-	h_x_id[2]=24;
-	h_x_id[3]=25;
-	h_x_id[4]=26;
-
-	// h_y_key = loadColumnPinned<int>("y_key", Y_LEN);
-	// h_y_id = loadColumnPinned<int>("y_id", Y_LEN);
-
-	//h_y_key = [1,3,4];
-	//h_y_id = [44,45,48];
-	h_y_key = (int *)malloc(sizeof(int)*3);
-	h_y_key[0]=1;
-	h_y_key[1]=3;
-	h_y_key[2]=4;
-
-	h_y_id = (int *)malloc(sizeof(int)*3);
-	h_y_id[0]=44;
-	h_y_id[1]=45;
-	h_y_id[2]=48;
-
-	//h_y_id = loadColumnPinned<int>("y_id", Y_LEN);
-
 	h_lo_orderkey = loadColumnPinnedSort<int>("lo_orderkey", LO_LEN);
 	h_lo_suppkey = loadColumnPinnedSort<int>("lo_suppkey", LO_LEN);
 	h_lo_custkey = loadColumnPinnedSort<int>("lo_custkey", LO_LEN);
@@ -1322,12 +1270,6 @@ CacheManager::loadColumnToCPU() {
 	d_year = new ColumnInfo("d_year", "d", D_LEN, 23, 4, h_d_year);
 	d_yearmonthnum = new ColumnInfo("d_yearmonthnum", "d", D_LEN, 24, 4, h_d_yearmonthnum);
 
-	x_key = new ColumnInfo("x_key", "x", X_LEN, 25, 5, h_x_key);
-	x_id = new ColumnInfo("x_id", "x", X_LEN, 26, 5, h_x_id);
-
-	y_key = new ColumnInfo("y_key", "y", Y_LEN, 27, 6, h_y_key);
-	y_id = new ColumnInfo("y_id", "y", Y_LEN, 28, 6, h_y_id);
-
 	allColumn[0] = lo_orderkey;
 	allColumn[1] = lo_suppkey;
 	allColumn[2] = lo_custkey;
@@ -1357,12 +1299,6 @@ CacheManager::loadColumnToCPU() {
 	allColumn[22] = d_datekey;
 	allColumn[23] = d_year;
 	allColumn[24] = d_yearmonthnum;
-
-	allColumn[25] = x_key;
-	allColumn[26] = x_id;
-
-	allColumn[27] = y_key;
-	allColumn[28] = y_id;
 
 	columns_in_table.resize(TOT_TABLE);
 	for (int i = 0; i < TOT_COLUMN; i++) {
@@ -1406,12 +1342,6 @@ CacheManager::~CacheManager() {
 	CubDebugExit(cudaFreeHost(h_d_year));
 	CubDebugExit(cudaFreeHost(h_d_yearmonthnum));
 
-	CubDebugExit(cudaFreeHost(h_x_key));
-	CubDebugExit(cudaFreeHost(h_x_id));
-
-	CubDebugExit(cudaFreeHost(h_y_key));
-	CubDebugExit(cudaFreeHost(h_y_id));
-
 	delete lo_orderkey;
 	delete lo_orderdate;
 	delete lo_custkey;
@@ -1441,12 +1371,6 @@ CacheManager::~CacheManager() {
 	delete d_datekey;
 	delete d_year;
 	delete d_yearmonthnum;
-
-	delete x_key;
-	delete x_id;
-
-	delete y_key;
-	delete y_id;
 
 	for (int i = 0; i < TOT_COLUMN; i++) {
 		CubDebugExit(cudaFreeHost(segment_list[i]));

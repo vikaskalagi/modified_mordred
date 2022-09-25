@@ -415,7 +415,6 @@ public:
 	void parseQuery41();
 	void parseQuery42();
 	void parseQuery43();
-	void parseQuery53();
 
 	void prepareQuery(int query, Distribution dist = None);
 

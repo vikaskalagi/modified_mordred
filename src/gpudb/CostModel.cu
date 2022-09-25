@@ -3,7 +3,6 @@
 #include "CPUGPUProcessing.h"
 
 CostModel::CostModel(int _L, int _total_segment, int _n_group_key, int _n_aggr_key, int _sg, int _table_id, QueryOptimizer* _qo) {
-	cout << "costModel inside" << endl;
 	L = (double) _L;
 	ori_L = (double) _L;
 	n_group_key = _n_group_key;
@@ -17,7 +16,7 @@ CostModel::CostModel(int _L, int _total_segment, int _n_group_key, int _n_aggr_k
 	total_segment = _total_segment;
 
 	Operator* op = qo->opRoots[table_id][sg];
-	 cout << op->type << endl;
+	// cout << op->type << endl;
 	opPipeline.push_back(op);
 	op = op->children;
 

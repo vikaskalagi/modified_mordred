@@ -34,8 +34,6 @@ using namespace tbb;
 
 #if SF == 1
 #define DATA_DIR BASE_PATH "s1_columnar/"
-#define X_LEN 5
-#define Y_LEN 3
 #define LO_LEN 6001171
 //#define LO_LEN 1000
 #define P_LEN 200000
@@ -83,24 +81,13 @@ inline int index_of(string* arr, int len, string val) {
 }
 
 inline string lookup(string col_name) {
-  string xtable[] = { "x_key", "x_id"};
-  string ytable[] = { "y_key", "y_id"};
-
   string lineorder[] = { "lo_orderkey", "lo_linenumber", "lo_custkey", "lo_partkey", "lo_suppkey", "lo_orderdate", "lo_orderpriority", "lo_shippriority", "lo_quantity", "lo_extendedprice", "lo_ordtotalprice", "lo_discount", "lo_revenue", "lo_supplycost", "lo_tax", "lo_commitdate", "lo_shipmode"};
   string part[] = {"p_partkey", "p_name", "p_mfgr", "p_category", "p_brand1", "p_color", "p_type", "p_size", "p_container"};
   string supplier[] = {"s_suppkey", "s_name", "s_address", "s_city", "s_nation", "s_region", "s_phone"};
   string customer[] = {"c_custkey", "c_name", "c_address", "c_city", "c_nation", "c_region", "c_phone", "c_mktsegment"};
   string date[] = {"d_datekey", "d_date", "d_dayofweek", "d_month", "d_year", "d_yearmonthnum", "d_yearmonth", "d_daynuminweek", "d_daynuminmonth", "d_daynuminyear", "d_sellingseason", "d_lastdayinweekfl", "d_lastdayinmonthfl", "d_holidayfl", "d_weekdayfl"};
 
-  if (col_name[0] == 'x') {
-    int index = index_of(xtable, 2, col_name);
-    return "X" + to_string(index);
-  }
-  else if (col_name[0] == 'y') {
-    int index = index_of(ytable, 2, col_name);
-    return "Y" + to_string(index);
-  } 
-    else if (col_name[0] == 'l') {
+  if (col_name[0] == 'l') {
     int index = index_of(lineorder, 17, col_name);
     return "LINEORDER" + to_string(index);
   } else if (col_name[0] == 's') {
@@ -121,25 +108,13 @@ inline string lookup(string col_name) {
 }
 
 inline string lookupSort(string col_name) {
-
-  string xtable[] = { "x_key", "x_id"};
-  string ytable[] = { "y_key", "y_id"};
-
   string lineorder[] = { "lo_orderkey", "lo_linenumber", "lo_custkey", "lo_partkey", "lo_suppkey", "lo_orderdate", "lo_orderpriority", "lo_shippriority", "lo_quantity", "lo_extendedprice", "lo_ordtotalprice", "lo_discount", "lo_revenue", "lo_supplycost", "lo_tax", "lo_commitdate", "lo_shipmode"};
   string part[] = {"p_partkey", "p_name", "p_mfgr", "p_category", "p_brand1", "p_color", "p_type", "p_size", "p_container"};
   string supplier[] = {"s_suppkey", "s_name", "s_address", "s_city", "s_nation", "s_region", "s_phone"};
   string customer[] = {"c_custkey", "c_name", "c_address", "c_city", "c_nation", "c_region", "c_phone", "c_mktsegment"};
   string date[] = {"d_datekey", "d_date", "d_dayofweek", "d_month", "d_year", "d_yearmonthnum", "d_yearmonth", "d_daynuminweek", "d_daynuminmonth", "d_daynuminyear", "d_sellingseason", "d_lastdayinweekfl", "d_lastdayinmonthfl", "d_holidayfl", "d_weekdayfl"};
 
-  if (col_name[0] == 'x') {
-    int index = index_of(xtable, 2, col_name);
-    return "XSORT" + to_string(index);
-  }
-  else if (col_name[0] == 'y') {
-    int index = index_of(ytable, 2, col_name);
-    return "YSORT" + to_string(index);
-  }
-  else if (col_name[0] == 'l') {
+  if (col_name[0] == 'l') {
     int index = index_of(lineorder, 17, col_name);
     return "LINEORDERSORT" + to_string(index);
   } else if (col_name[0] == 's') {

@@ -118,7 +118,7 @@ QueryProcessing::executeTableDim(int table_id, int sg) {
     else CubDebugExit(cudaMalloc((void**) &d_total, 1 * sizeof(int)));
 
     // cout << "dim " << sg << endl;
-    //cout << qo->joinCPUcheck[table_id] << " check join : "<< qo->joinGPUcheck[table_id]<<"\n";
+
     if (sg == 0 || sg == 1) {
 
       if (qo->joinCPUcheck[table_id] && qo->joinGPUcheck[table_id]) {
@@ -210,7 +210,7 @@ QueryProcessing::executeTableFact_v1(int sg) {
     else CubDebugExit(cudaMalloc((void**) &d_total, 1 * sizeof(int)));
 
     // printf("fact sg = %d\n", sg);
-    cout << "queryprocess.cu 213 line: "<<qo->selectCPUPipelineCol[sg].size() << " "<<qo->selectGPUPipelineCol[sg].size()<<" "<<qo->joinGPUPipelineCol[sg].size()<<" "<<qo->joinCPUPipelineCol[sg].size()<<" "<<qo->groupbyGPUPipelineCol[sg].size()<<"\n";
+
     if (qo->selectCPUPipelineCol[sg].size() > 0) {
       if (qo->selectGPUPipelineCol[sg].size() > 0 && qo->joinGPUPipelineCol[sg].size() > 0) {
         if (qo->joinCPUPipelineCol[sg].size() == 0 && qo->groupbyGPUPipelineCol[sg].size() > 0) {
@@ -426,7 +426,6 @@ QueryProcessing::executeTableFact_v1(int sg) {
           else cgp->call_group_by_GPU(params, off_col, h_total, sg, streams[sg]);
 
         } else if (qo->joinCPUPipelineCol[sg].size() > 0 && qo->groupbyGPUPipelineCol[sg].size() == 0) {
-          cout << "came here 429 line in QP.cu : "<< qo->groupby_build.size() <<"\n";
           if (qo->groupby_build.size() == 0) cgp->call_probe_aggr_CPU(params, h_off_col, h_total, sg); 
           else cgp->call_probe_group_by_CPU(params, h_off_col, h_total, sg);
 
@@ -1399,7 +1398,7 @@ QueryProcessing::runQuery(CUcontext ctx) {
 
   cudaEventRecord(start, 0);
 
-  parallel_for(short(0), qo->par_segment_count[5], [=](short i){
+  parallel_for(short(0), qo->par_segment_count[0], [=](short i){
 
     // cout << i << " of " << qo->par_segment_count[0] << endl;
 
@@ -1419,8 +1418,8 @@ QueryProcessing::runQuery(CUcontext ctx) {
     cudaEvent_t start_, stop_; 
     cudaEventCreate(&start_); cudaEventCreate(&stop_);
     cudaEventRecord(start_, 0);
-    cout<< qo->segment_group_count[5][sg] <<" check the segmentGroupCount 1421 line QP.cu\n";
-    if (qo->segment_group_count[0][sg] > 0 || qo->segment_group_count[5][sg] > 0) {
+
+    if (qo->segment_group_count[0][sg] > 0) {
       executeTableFact_v1(sg);
     }
 
@@ -2238,27 +2237,11 @@ QueryProcessing::processQuery(CUcontext ctx) {
   cudaEventRecord(start, 0);
 
   qo->prepareOperatorPlacement();
-  if (verbose) {
-    cout << "prepareOperatorPlacement Time: " << time << endl;
-    cout << endl;
-  }
-  if (query == 53){
-    qo->groupBitmapSegmentTable(5, query);
-  }
-  else{
-    qo->groupBitmapSegmentTable(0, query);
-  }
-  if (verbose) {
-    cout << "groupBitmapSegmentTable Time: " << time << endl;
-    cout << endl;
-  }
+  qo->groupBitmapSegmentTable(0, query);
     for (int tbl = 0; tbl < qo->join.size(); tbl++) {
       qo->groupBitmapSegmentTable(qo->join[tbl].second->table_id, query);
   }
-if (verbose) {
-    cout << "groupBitmapSegmentTable for loop Time: " << time << endl;
-    cout << endl;
-  }
+
   cudaEventRecord(stop, 0);
   cudaEventSynchronize(stop);
   cudaEventElapsedTime(&time, start, stop);
@@ -2289,10 +2272,10 @@ if (verbose) {
     cout << "Result:" << endl;
     int res_count = 0;
     for (int i=0; i< params->total_val; i++) {
-      //if (params->res[6*i+4] != 0) {
+      if (params->res[6*i+4] != 0) {
         cout << params->res[6*i] << " " << params->res[6*i+1] << " " << params->res[6*i+2] << " " << params->res[6*i+3] << " " << reinterpret_cast<unsigned long long*>(&params->res[6*i+4])[0]  << endl;
         res_count++;
-    //  }
+      }
     }
     cout << "Res count = " << res_count << endl;
     cout << "Query Execution Time: " << time << endl;
