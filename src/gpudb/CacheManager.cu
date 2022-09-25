@@ -1312,10 +1312,10 @@ CacheManager::loadColumnToCPU() {
 	h_d_yearmonthnum[1] = 199401;
 	h_d_yearmonthnum[2] = 199401;
 	for(int ui=0;ui<LO_LEN;ui++){
-		cout<<h_lo_orderdate[ui]<<" "<<h_lo_discount[ui]<<" "<<h_lo_extendedprice[ui]<<" "<<h_lo_discount[ui]<<" lo table data\n";
+		cout<<h_lo_orderdate[ui]<<" "<<h_lo_discount[ui]<<" "<<h_lo_extendedprice[ui]<<" lo table data\n";
 	}
 	for(int ui=0;ui<D_LEN;ui++){
-		cout<<h_d_datekey[ui] <<" datakey table data\n";
+		cout<<h_d_datekey[ui]<<" "<<h_d_year[ui] <<" datakey table data\n";
 	}
 
 	lo_orderkey = new ColumnInfo("lo_orderkey", "lo", LO_LEN, 0, 0, h_lo_orderkey);
