@@ -120,7 +120,7 @@ QueryProcessing::executeTableDim(int table_id, int sg) {
     // cout << "dim " << sg << endl;
 
     if (sg == 0 || sg == 1) {
-
+      cout << qo->joinCPUcheck[table_id] <<" "<< qo->joinGPUcheck[table_id]<<" 123 line in QP.cu\n";
       if (qo->joinCPUcheck[table_id] && qo->joinGPUcheck[table_id]) {
         cgp->call_bfilter_CPU(params, h_off_col, h_total, sg, table_id);
         cgp->switch_device_dim(d_off_col, h_off_col, d_total, h_total, sg, 0, table_id, streams[sg]);
