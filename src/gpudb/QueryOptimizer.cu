@@ -1773,7 +1773,7 @@ QueryOptimizer::groupBitmapSegmentTable(int table_id, int query, bool isprofile)
 					bit = (sg & (1 << k)) >> k;
 					if (!bit) break;
 				}
-
+				cout<<" initial type: "<<op->type<<"\n";
 				if (op->type == GroupBy) {
 					(bit & groupGPUcheck) ? (op->device = GPU):(op->device = CPU);
 				} else if (op->type == Aggr) {
@@ -1790,7 +1790,7 @@ QueryOptimizer::groupBitmapSegmentTable(int table_id, int query, bool isprofile)
 
 				sg = sg >> op->columns.size();
 			}
-cout << "4 Table id : " << table_id << endl;
+cout << "4 Table id : " << opParsed[table_id].size() << endl;
 			Operator* build_op = NULL;
 
 			for (int j = 0; j < opParsed[table_id].size(); j++) {
