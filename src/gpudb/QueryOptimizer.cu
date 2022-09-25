@@ -1844,7 +1844,7 @@ cout << "5 Table id : " << opGPUPipeline[table_id][i][0].size()<<" cpu: "<<opCPU
 				}
 				op->addChild(NULL);
 			}
-cout << "6 Table id : " << table_id << endl;
+cout << "6 Table id : " << build_op != NULL << endl;
 			// Operator* t = opRoots[table_id][i];
 			// while (t != NULL) {
 			// 	cout << "yow " << t->type << endl;
