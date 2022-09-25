@@ -157,6 +157,37 @@ CacheManager::readSegmentMinMax() {
 	for (int i = 0; i < TOT_COLUMN; i++) {
 		string line;
 		cout<<DATA_DIR<<" "<<allColumn[i]->column_name<<"\n";
+		if(allColumn[i]->column_name == "lo_discount"){
+			segment_min[i][0]=4;
+			segment_max[i][0]=6;
+			continue;
+		}
+		if(allColumn[i]->column_name == "lo_orderdate"){
+			segment_min[i][0]=199401;
+			segment_max[i][0]=199401;
+			continue;
+		}
+		if(allColumn[i]->column_name == "d_yearmonthnum"){
+			segment_min[i][0]=199401;
+			segment_max[i][0]=199401;
+			continue;
+		}
+		if(allColumn[i]->column_name == "lo_quantity"){
+			segment_min[i][0]=30;
+			segment_max[i][0]=30;
+			continue;
+		}
+		if(allColumn[i]->column_name == "d_datekey"){
+			segment_min[i][0]=199401;
+			segment_max[i][0]=199401;
+			continue;
+		}
+		
+		if(allColumn[i]->column_name == "lo_extendedprice"){
+			segment_min[i][0]=1;
+			segment_max[i][0]=3;
+			continue;
+		}
 		ifstream myfile (DATA_DIR + allColumn[i]->column_name + "minmax");
 		if (myfile.is_open()) {
 			int segment_idx = 0;
@@ -1249,11 +1280,11 @@ CacheManager::loadColumnToCPU() {
 		cout<<h_d_datekey[ui] <<" "<<h_d_yearmonthnum[ui]<<" datakey table data\n";
 	}
 
-	h_lo_orderdate[0] = 19950218;
-	h_lo_orderdate[1] = 19950218;
-	h_lo_orderdate[2] = 19950218;
-	h_lo_orderdate[3] = 19950218;
-	h_lo_orderdate[4] = 19950218;
+	h_lo_orderdate[0] = 199401;
+	h_lo_orderdate[1] = 199401;
+	h_lo_orderdate[2] = 199401;
+	h_lo_orderdate[3] = 199401;
+	h_lo_orderdate[4] = 199401;
 
 	h_lo_discount[0] = 4;
 	h_lo_discount[1] = 5;
@@ -1273,9 +1304,9 @@ CacheManager::loadColumnToCPU() {
 	h_lo_extendedprice[3] = 2;
 	h_lo_extendedprice[4] = 3;
 
-	h_d_datekey[0] = 19950218;
-	h_d_datekey[1] = 19950218;
-	h_d_datekey[2] = 19950218;
+	h_d_datekey[0] = 199401;
+	h_d_datekey[1] = 199401;
+	h_d_datekey[2] = 199401;
 
 	h_d_yearmonthnum[0] = 199401;
 	h_d_yearmonthnum[1] = 199401;
