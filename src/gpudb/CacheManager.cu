@@ -174,7 +174,7 @@ CacheManager::readSegmentMinMax() {
 				segment_max[i][segment_idx] = stoi(maxstring);
 				segment_idx++;
 			}
-			cout<< segment_idx <<" "<< allColumn[i]->total_segment<<"\n";
+			cout<< segment_idx <<" "<< segment_min[i][0]<<" "<<segment_max[i][0]<<"\n";
 			assert(segment_idx == allColumn[i]->total_segment);
 			myfile.close();
 		} else {
