@@ -2653,7 +2653,7 @@ QueryOptimizer::prepareQuery(int query, Distribution dist) {
 			params->map_filter_func_host[cm->d_yearmonthnum] = &host_pred_eq;
 			params->map_filter_func_host[cm->lo_discount] = &host_pred_between;
 			params->map_filter_func_host[cm->lo_quantity] = &host_pred_between;
-
+			cout << " Query: " << query << " " << params->compare1[cm->lo_orderdate] << " " << params->compare2[cm->lo_orderdate] << endl;
 		} else if (query == 13) {
 
 			params->selectivity[cm->d_datekey] = 1;
