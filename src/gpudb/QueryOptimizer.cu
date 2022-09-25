@@ -182,7 +182,7 @@ QueryOptimizer::parseQuery11() {
   queryColumn[0].push_back(cm->lo_orderdate);
   queryColumn[0].push_back(cm->lo_extendedprice);
   queryColumn[0].push_back(cm->lo_discount);
-  //queryColumn[4].push_back(cm->d_year);
+  queryColumn[4].push_back(cm->d_year);
   queryColumn[4].push_back(cm->d_datekey);
 
 	//querySelectColumn.push_back(cm->lo_discount);
@@ -190,6 +190,8 @@ QueryOptimizer::parseQuery11() {
 	//querySelectColumn.push_back(cm->d_year);
 	queryBuildColumn.push_back(cm->d_datekey);
 	queryProbeColumn.push_back(cm->lo_orderdate);
+	queryGroupByColumn.push_back(cm->d_year);
+	queryGroupByColumn.push_back(cm->lo_discount);
 	queryAggrColumn.push_back(cm->lo_extendedprice);
 	queryAggrColumn.push_back(cm->lo_discount);
 
@@ -199,6 +201,8 @@ QueryOptimizer::parseQuery11() {
 	aggregation[cm->lo_orderdate].push_back(cm->lo_extendedprice);
 	aggregation[cm->lo_orderdate].push_back(cm->lo_discount);
 
+	groupby_build[cm->p_partkey].push_back(cm->lo_discount);
+	groupby_build[cm->d_datekey].push_back(cm->d_year);
 	//select_probe[cm->lo_orderdate].push_back(cm->lo_quantity);
 	//select_probe[cm->lo_orderdate].push_back(cm->lo_discount);
 
@@ -222,6 +226,11 @@ QueryOptimizer::parseQuery11() {
 	op = new Operator (CPU, 0, 0, Aggr);
 	op->columns.push_back(cm->lo_extendedprice);
 	op->columns.push_back(cm->lo_discount);
+	opParsed[0].push_back(op);
+	op = new Operator (CPU, 0, 0, GroupBy);
+	//op->columns.push_back(cm->lo_revenue);
+	op->supporting_columns.push_back(cm->d_year);
+	op->supporting_columns.push_back(cm->lo_discount);
 	opParsed[0].push_back(op);
 
 
