@@ -270,13 +270,13 @@ QueryOptimizer::parseQuery53() {
 	op = new Operator (CPU, 0, 5, Probe);
 	op->columns.push_back(cm->x_key);
 	op->supporting_columns.push_back(cm->y_key);
-	opParsed[0].push_back(op);
+	opParsed[5].push_back(op);
 
 
 	op = new Operator (CPU, 0, 6, Build);
 	op->columns.push_back(cm->y_key);
 	op->supporting_columns.push_back(cm->x_key);
-	opParsed[4].push_back(op);
+	opParsed[6].push_back(op);
 
 }
 
