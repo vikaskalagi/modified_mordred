@@ -2644,6 +2644,7 @@ QueryOptimizer::prepareQuery(int query, Distribution dist) {
 				params->compare2[cm->d_yearmonthnum] = 199401;
 				params->compare1[cm->lo_orderdate] = 19940101;
 				params->compare2[cm->lo_orderdate] = 19940131;
+				cout << " 0 check Query: " << query << " " << params->compare1[cm->lo_orderdate] << " " << params->compare2[cm->lo_orderdate] << endl;
 			}
 			cout << " 1 check Query: " << query << " " << params->compare1[cm->lo_orderdate] << " " << params->compare2[cm->lo_orderdate] << endl;
 			CubDebugExit(cudaMemcpyFromSymbol(&(params->map_filter_func_dev[cm->d_yearmonthnum]), p_pred_eq<int, 128, 4>, sizeof(filter_func_t_dev<int, 128, 4>)));
