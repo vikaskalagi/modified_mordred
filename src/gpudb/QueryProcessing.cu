@@ -1418,8 +1418,8 @@ QueryProcessing::runQuery(CUcontext ctx) {
     cudaEvent_t start_, stop_; 
     cudaEventCreate(&start_); cudaEventCreate(&stop_);
     cudaEventRecord(start_, 0);
-
-    if (qo->segment_group_count[0][sg] > 0) {
+    cout<< qo->segment_group_count[5][sg] <<" check the segmentGroupCount 1421 line QP.cu\n";
+    if (qo->segment_group_count[0][sg] > 0 || qo->segment_group_count[5][sg] > 0) {
       executeTableFact_v1(sg);
     }
 
