@@ -1272,6 +1272,27 @@ CacheManager::loadColumnToCPU() {
 	d_year = new ColumnInfo("d_year", "d", D_LEN, 23, 4, h_d_year);
 	d_yearmonthnum = new ColumnInfo("d_yearmonthnum", "d", D_LEN, 24, 4, h_d_yearmonthnum);
 
+	h_lo_orderdate[0] = 1;
+	h_lo_orderdate[1] = 2;
+	h_lo_orderdate[2] = 1;
+	h_lo_orderdate[3] = 2;
+	h_lo_orderdate[4] = 3;
+
+	h_lo_discount[0] = 1;
+	h_lo_discount[1] = 2;
+	h_lo_discount[2] = 1;
+	h_lo_discount[3] = 2;
+	h_lo_discount[4] = 3;
+
+	h_lo_extendedprice[0] = 1;
+	h_lo_extendedprice[1] = 2;
+	h_lo_extendedprice[2] = 1;
+	h_lo_extendedprice[3] = 2;
+	h_lo_extendedprice[4] = 3;
+
+	h_d_datekey[0] = 1;
+	h_d_datekey[1] = 2;
+	h_d_datekey[2] = 3;
 	for(int ui=0;ui<LO_LEN;ui++){
 		cout<<h_lo_orderdate[ui]<<" "<<h_lo_discount[ui]<<" "<<h_lo_extendedprice[ui]<<" lo table data\n";
 	}
