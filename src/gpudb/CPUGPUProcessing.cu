@@ -2322,6 +2322,7 @@ CPUGPUProcessing::call_probe_aggr_CPU(QueryParams* params, int** &h_off_col, int
   cout<< "2322 in CGPro.cu : "<<qo->joinCPUPipelineCol[sg].size()<<"\n";
   for (int i = 0; i < qo->joinCPUPipelineCol[sg].size(); i++) {
     ColumnInfo* column = qo->joinCPUPipelineCol[sg][i];
+    cout<< column->column_name <<" Fkey Pkey:\n";
     int table_id = qo->fkey_pkey[column]->table_id;
     fkey_col[table_id - 1] = column->col_ptr;
     ColumnInfo* pkey = qo->fkey_pkey[column];
