@@ -1249,11 +1249,11 @@ CacheManager::loadColumnToCPU() {
 		cout<<h_d_datekey[ui] <<" "<<h_d_yearmonthnum[ui]<<" datakey table data\n";
 	}
 
-	h_lo_orderdate[0] = 1;
-	h_lo_orderdate[1] = 2;
-	h_lo_orderdate[2] = 1;
-	h_lo_orderdate[3] = 2;
-	h_lo_orderdate[4] = 3;
+	h_lo_orderdate[0] = 19950218;
+	h_lo_orderdate[1] = 19950218;
+	h_lo_orderdate[2] = 19950218;
+	h_lo_orderdate[3] = 19950218;
+	h_lo_orderdate[4] = 19950218;
 
 	h_lo_discount[0] = 4;
 	h_lo_discount[1] = 5;
@@ -1273,9 +1273,9 @@ CacheManager::loadColumnToCPU() {
 	h_lo_extendedprice[3] = 2;
 	h_lo_extendedprice[4] = 3;
 
-	h_d_datekey[0] = 1;
-	h_d_datekey[1] = 2;
-	h_d_datekey[2] = 3;
+	h_d_datekey[0] = 19950218;
+	h_d_datekey[1] = 19950218;
+	h_d_datekey[2] = 19950218;
 
 	h_d_yearmonthnum[0] = 199401;
 	h_d_yearmonthnum[1] = 199401;
