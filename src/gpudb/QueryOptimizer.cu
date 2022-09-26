@@ -186,14 +186,14 @@ QueryOptimizer::parseQuery11() {
   queryColumn[4].push_back(cm->d_year);
   queryColumn[4].push_back(cm->d_datekey);
 
-	// querySelectColumn.push_back(cm->d_year);
-	// querySelectColumn.push_back(cm->lo_quantity);
+	 querySelectColumn.push_back(cm->d_year);
+	 querySelectColumn.push_back(cm->lo_quantity);
 	//querySelectColumn.push_back(cm->d_year);
 	queryBuildColumn.push_back(cm->d_datekey);
 	queryProbeColumn.push_back(cm->lo_orderdate);
-	queryGroupByColumn.push_back(cm->d_year);
+	//queryGroupByColumn.push_back(cm->d_year);
 	//queryGroupByColumn.push_back(cm->lo_quantity);
-	queryAggrColumn.push_back(cm->lo_quantity);
+	//queryAggrColumn.push_back(cm->lo_quantity);
 	//queryAggrColumn.push_back(cm->lo_extendedprice);
 	//queryAggrColumn.push_back(cm->lo_discount);
 
@@ -202,9 +202,9 @@ QueryOptimizer::parseQuery11() {
 
 	// aggregation[cm->lo_orderdate].push_back(cm->lo_extendedprice);
 	// aggregation[cm->lo_orderdate].push_back(cm->lo_discount);
-	aggregation[cm->lo_orderdate].push_back(cm->lo_quantity);
+	//aggregation[cm->lo_orderdate].push_back(cm->lo_quantity);
 	//groupby_build[cm->lo_orderdate].push_back(cm->lo_quantity);
-	groupby_build[cm->d_datekey].push_back(cm->d_year);
+	//groupby_build[cm->d_datekey].push_back(cm->d_year);
 	//select_probe[cm->lo_orderdate].push_back(cm->lo_quantity);
 	//select_probe[cm->lo_orderdate].push_back(cm->lo_discount);
 
@@ -229,12 +229,14 @@ QueryOptimizer::parseQuery11() {
 	// op->columns.push_back(cm->lo_extendedprice);
 	// op->columns.push_back(cm->lo_discount);
 	// opParsed[0].push_back(op);
-	op = new Operator (CPU, 0, 0, GroupBy);
-	op->columns.push_back(cm->lo_quantity);
-	//op->columns.push_back(cm->lo_quantity);
-	op->supporting_columns.push_back(cm->d_year);
+	// op = new Operator (CPU, 0, 0, GroupBy);
+	// op->columns.push_back(cm->lo_quantity);
+	// //op->columns.push_back(cm->lo_quantity);
+	// op->supporting_columns.push_back(cm->d_year);
+	// opParsed[0].push_back(op);
+	op = new Operator (CPU, 0, 0, Materialize);
+	op->columns.push_back(cm->lo_orderdate);
 	opParsed[0].push_back(op);
-
 
 	// op = new Operator (CPU, 0, 4, Filter);
 	// op->columns.push_back(cm->d_year);
@@ -243,7 +245,10 @@ QueryOptimizer::parseQuery11() {
 	op->columns.push_back(cm->d_datekey);
 	op->supporting_columns.push_back(cm->lo_orderdate);
 	opParsed[4].push_back(op);
-
+	
+	op = new Operator (CPU, 0, 4, Materialize);
+	op->columns.push_back(cm->d_year);;
+	opParsed[4].push_back(op);
 }
 
 void 
