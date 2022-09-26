@@ -215,9 +215,9 @@ QueryOptimizer::parseQuery11() {
 	opParsed.resize(cm->TOT_TABLE);
 
 	Operator* op;
-	// op = new Operator (CPU, 0, 0, Filter);
-	// op->columns.push_back(cm->lo_discount);
-	// opParsed[0].push_back(op);
+	op = new Operator (CPU, 0, 0, Filter);
+	op->columns.push_back(cm->lo_quantity);
+	opParsed[0].push_back(op);
 	// op = new Operator (CPU, 0, 0, Filter);
 	// op->columns.push_back(cm->lo_quantity);
 	// opParsed[0].push_back(op);
@@ -238,9 +238,9 @@ QueryOptimizer::parseQuery11() {
 	op->columns.push_back(cm->lo_quantity);
 	opParsed[0].push_back(op);
 
-	// op = new Operator (CPU, 0, 4, Filter);
-	// op->columns.push_back(cm->d_year);
-	// opParsed[4].push_back(op);
+	op = new Operator (CPU, 0, 4, Filter);
+	op->columns.push_back(cm->d_year);
+	opParsed[4].push_back(op);
 	op = new Operator (CPU, 0, 4, Build);
 	op->columns.push_back(cm->d_datekey);
 	op->supporting_columns.push_back(cm->lo_orderdate);
