@@ -235,7 +235,7 @@ QueryOptimizer::parseQuery11() {
 	// op->supporting_columns.push_back(cm->d_year);
 	// opParsed[0].push_back(op);
 	op = new Operator (CPU, 0, 0, Materialize);
-	op->columns.push_back(cm->lo_orderdate);
+	op->columns.push_back(cm->lo_quantity);
 	opParsed[0].push_back(op);
 
 	// op = new Operator (CPU, 0, 4, Filter);
