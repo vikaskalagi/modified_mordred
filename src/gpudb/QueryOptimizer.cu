@@ -194,13 +194,13 @@ QueryOptimizer::parseQuery11() {
 	//queryGroupByColumn.push_back(cm->d_year);
 	//queryGroupByColumn.push_back(cm->lo_quantity);
 	queryAggrColumn.push_back(cm->lo_quantity);
-	queryAggrColumn.push_back(cm->lo_extendedprice);
+	//queryAggrColumn.push_back(cm->lo_extendedprice);
 	//queryAggrColumn.push_back(cm->lo_discount);
 
 	join.resize(1);
 	join[0] = pair<ColumnInfo*, ColumnInfo*> (cm->lo_orderdate, cm->d_datekey);
 
-	 aggregation[cm->lo_orderdate].push_back(cm->lo_extendedprice);
+	// aggregation[cm->lo_orderdate].push_back(cm->lo_extendedprice);
 	// aggregation[cm->lo_orderdate].push_back(cm->lo_discount);
 	aggregation[cm->lo_orderdate].push_back(cm->lo_quantity);
 	//groupby_build[cm->lo_orderdate].push_back(cm->lo_quantity);
@@ -227,7 +227,7 @@ QueryOptimizer::parseQuery11() {
 	opParsed[0].push_back(op);
 	op = new Operator (CPU, 0, 0, Aggr);
 	op->columns.push_back(cm->lo_quantity);
-	op->columns.push_back(cm->lo_extendedprice);
+	//op->columns.push_back(cm->lo_extendedprice);
 	opParsed[0].push_back(op);
 	// op = new Operator (CPU, 0, 0, GroupBy);
 	// op->columns.push_back(cm->lo_quantity);
@@ -2724,8 +2724,8 @@ QueryOptimizer::prepareQuery(int query, Distribution dist) {
 			params->map_filter_func_host[cm->lo_quantity] = &host_pred_between;
 		}
 
-		CubDebugExit(cudaMemcpyFromSymbol(&(params->d_group_func), p_mul_func<int>, sizeof(group_func_t<int>)));
-		params->h_group_func = &host_mul_func;
+		CubDebugExit(cudaMemcpyFromSymbol(&(params->d_group_func), p_sub_func<int>, sizeof(group_func_t<int>)));
+		params->h_group_func = &host_sub_func;
 
 		params->unique_val[cm->p_partkey] = 0;
 		params->unique_val[cm->c_custkey] = 0;
