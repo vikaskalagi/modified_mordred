@@ -186,8 +186,8 @@ QueryOptimizer::parseQuery11() {
   queryColumn[4].push_back(cm->d_year);
   queryColumn[4].push_back(cm->d_datekey);
 
-	//querySelectColumn.push_back(cm->c_nation);
-	//querySelectColumn.push_back(cm->lo_quantity);
+	querySelectColumn.push_back(cm->d_year);
+	querySelectColumn.push_back(cm->lo_quantity);
 	//querySelectColumn.push_back(cm->d_year);
 	queryBuildColumn.push_back(cm->d_datekey);
 	queryProbeColumn.push_back(cm->lo_orderdate);
