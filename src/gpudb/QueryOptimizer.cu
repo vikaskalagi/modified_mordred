@@ -183,17 +183,17 @@ QueryOptimizer::parseQuery11() {
   //queryColumn[0].push_back(cm->lo_extendedprice);
   //queryColumn[0].push_back(cm->lo_discount);
   //queryColumn[2].push_back(cm->c_nation);
-  queryColumn[4].push_back(cm->d_year);
+  //queryColumn[4].push_back(cm->d_year);
   queryColumn[4].push_back(cm->d_datekey);
 
-	 querySelectColumn.push_back(cm->d_year);
-	 querySelectColumn.push_back(cm->lo_quantity);
+	 //querySelectColumn.push_back(cm->d_year);
+	 //querySelectColumn.push_back(cm->lo_quantity);
 	//querySelectColumn.push_back(cm->d_year);
 	queryBuildColumn.push_back(cm->d_datekey);
 	queryProbeColumn.push_back(cm->lo_orderdate);
 	//queryGroupByColumn.push_back(cm->d_year);
 	//queryGroupByColumn.push_back(cm->lo_quantity);
-	//queryAggrColumn.push_back(cm->lo_quantity);
+	queryAggrColumn.push_back(cm->lo_quantity);
 	//queryAggrColumn.push_back(cm->lo_extendedprice);
 	//queryAggrColumn.push_back(cm->lo_discount);
 
@@ -225,18 +225,19 @@ QueryOptimizer::parseQuery11() {
 	op->columns.push_back(cm->lo_orderdate);
 	op->supporting_columns.push_back(cm->d_datekey);
 	opParsed[0].push_back(op);
-	// op = new Operator (CPU, 0, 0, Aggr);
-	// op->columns.push_back(cm->lo_extendedprice);
-	// op->columns.push_back(cm->lo_discount);
-	// opParsed[0].push_back(op);
+	op = new Operator (CPU, 0, 0, Aggr);
+	op->columns.push_back(cm->lo_quantity);
+	//op->columns.push_back(cm->lo_discount);
+	opParsed[0].push_back(op);
 	// op = new Operator (CPU, 0, 0, GroupBy);
 	// op->columns.push_back(cm->lo_quantity);
 	// //op->columns.push_back(cm->lo_quantity);
 	// op->supporting_columns.push_back(cm->d_year);
 	// opParsed[0].push_back(op);
-	op = new Operator (CPU, 0, 0, Materialize);
-	op->columns.push_back(cm->lo_quantity);
-	opParsed[0].push_back(op);
+	
+	// op = new Operator (CPU, 0, 0, Materialize);
+	// op->columns.push_back(cm->lo_quantity);
+	// opParsed[0].push_back(op);
 
 	// op = new Operator (CPU, 0, 4, Filter);
 	// op->columns.push_back(cm->d_year);
@@ -246,9 +247,9 @@ QueryOptimizer::parseQuery11() {
 	op->supporting_columns.push_back(cm->lo_orderdate);
 	opParsed[4].push_back(op);
 	
-	op = new Operator (CPU, 0, 4, Materialize);
-	op->columns.push_back(cm->d_year);;
-	opParsed[4].push_back(op);
+	// op = new Operator (CPU, 0, 4, Materialize);
+	// op->columns.push_back(cm->d_year);;
+	// opParsed[4].push_back(op);
 }
 
 void 
@@ -2572,15 +2573,15 @@ QueryOptimizer::prepareQuery(int query, Distribution dist) {
 	if (query == 11 || query == 12 || query == 13) {
 
 		if (query == 11) {
-			 params->selectivity[cm->d_year] = 1;
+			 //params->selectivity[cm->d_year] = 1;
 			params->selectivity[cm->lo_orderdate] = 1;
 			 //params->selectivity[cm->lo_discount] = 3.0/11 * 1.5;
-			 params->selectivity[cm->lo_quantity] = 1;
+			 //params->selectivity[cm->lo_quantity] = 1;
 
-			 params->real_selectivity[cm->d_year] = 1;
+			 //params->real_selectivity[cm->d_year] = 1;
 			params->real_selectivity[cm->lo_orderdate] = 1;
 			// params->real_selectivity[cm->lo_discount] = 3.0/11;
-			 params->real_selectivity[cm->lo_quantity] = 1;
+			 //params->real_selectivity[cm->lo_quantity] = 1;
 
 			// params->compare1[cm->lo_discount] = 1;
 			// params->compare2[cm->lo_discount] = 3;
