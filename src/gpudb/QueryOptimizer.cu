@@ -2726,7 +2726,7 @@ QueryOptimizer::prepareQuery(int query, Distribution dist) {
 
 		CubDebugExit(cudaMemcpyFromSymbol(&(params->d_group_func), p_mul_func<int>, sizeof(group_func_t<int>)));
 		params->h_group_func = &host_mul_func;
-		cout << params->h_group_func << " "<<host_mul_func <<" "<<host_sub_func<<" group func address\n";
+		cout << params->h_group_func << " "<< host_mul_func << " " << host_sub_func << " group func address\n";
 		// CubDebugExit(cudaMemcpyFromSymbol(&(params->d_group_func), p_sub_func<int>, sizeof(group_func_t<int>)));
 		// params->h_group_func = &host_sub_func;
 
