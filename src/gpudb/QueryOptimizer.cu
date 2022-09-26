@@ -194,13 +194,13 @@ QueryOptimizer::parseQuery11() {
 	//queryGroupByColumn.push_back(cm->d_year);
 	//queryGroupByColumn.push_back(cm->lo_quantity);
 	queryAggrColumn.push_back(cm->lo_quantity);
-	//queryAggrColumn.push_back(cm->lo_extendedprice);
+	queryAggrColumn.push_back(cm->lo_extendedprice);
 	//queryAggrColumn.push_back(cm->lo_discount);
 
 	join.resize(1);
 	join[0] = pair<ColumnInfo*, ColumnInfo*> (cm->lo_orderdate, cm->d_datekey);
 
-	// aggregation[cm->lo_orderdate].push_back(cm->lo_extendedprice);
+	 aggregation[cm->lo_orderdate].push_back(cm->lo_extendedprice);
 	// aggregation[cm->lo_orderdate].push_back(cm->lo_discount);
 	aggregation[cm->lo_orderdate].push_back(cm->lo_quantity);
 	//groupby_build[cm->lo_orderdate].push_back(cm->lo_quantity);
@@ -227,7 +227,7 @@ QueryOptimizer::parseQuery11() {
 	opParsed[0].push_back(op);
 	op = new Operator (CPU, 0, 0, Aggr);
 	op->columns.push_back(cm->lo_quantity);
-	//op->columns.push_back(cm->lo_extendedprice);
+	op->columns.push_back(cm->lo_extendedprice);
 	opParsed[0].push_back(op);
 	// op = new Operator (CPU, 0, 0, GroupBy);
 	// op->columns.push_back(cm->lo_quantity);
@@ -2737,7 +2737,7 @@ QueryOptimizer::prepareQuery(int query, Distribution dist) {
 		params->dim_len[cm->s_suppkey] = 0;
 		params->dim_len[cm->d_datekey] = 19981230 - 19920101 + 1;
 
-		params->total_val = 50;
+		params->total_val = 1;
 
 		float time;
 		SETUP_TIMING();
