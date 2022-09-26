@@ -2605,8 +2605,8 @@ QueryOptimizer::prepareQuery(int query, Distribution dist) {
 			// 	params->compare1[cm->lo_orderdate] = 19930101;
 			// 	params->compare2[cm->lo_orderdate] = 19931231;
 			// }
-			params->compare1[cm->lo_orderdate] = 19920101;
-			params->compare2[cm->lo_orderdate] = 19981231;
+			// params->compare1[cm->lo_orderdate] = 19920101;
+			// params->compare2[cm->lo_orderdate] = 19981231;
 			// CubDebugExit(cudaMemcpyFromSymbol(&(params->map_filter_func_dev[cm->d_year]), p_pred_eq<int, 128, 4>, sizeof(filter_func_t_dev<int, 128, 4>)));
 			// CubDebugExit(cudaMemcpyFromSymbol(&(params->map_filter_func_dev[cm->lo_discount]), p_pred_between<int, 128, 4>, sizeof(filter_func_t_dev<int, 128, 4>)));
 			// CubDebugExit(cudaMemcpyFromSymbol(&(params->map_filter_func_dev[cm->lo_quantity]), p_pred_between<int, 128, 4>, sizeof(filter_func_t_dev<int, 128, 4>)));
