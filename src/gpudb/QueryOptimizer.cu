@@ -2572,15 +2572,15 @@ QueryOptimizer::prepareQuery(int query, Distribution dist) {
 	if (query == 11 || query == 12 || query == 13) {
 
 		if (query == 11) {
-			// params->selectivity[cm->d_year] = 1;
+			 params->selectivity[cm->d_year] = 1;
 			params->selectivity[cm->lo_orderdate] = 1;
 			 //params->selectivity[cm->lo_discount] = 3.0/11 * 1.5;
-			// params->selectivity[cm->lo_quantity] = 0.5 * 1.5;
+			 params->selectivity[cm->lo_quantity] = 1;
 
-			// params->real_selectivity[cm->d_year] = 1.0/8;
+			 params->real_selectivity[cm->d_year] = 1;
 			params->real_selectivity[cm->lo_orderdate] = 1;
 			// params->real_selectivity[cm->lo_discount] = 3.0/11;
-			// params->real_selectivity[cm->lo_quantity] = 0.5;
+			 params->real_selectivity[cm->lo_quantity] = 1;
 
 			// params->compare1[cm->lo_discount] = 1;
 			// params->compare2[cm->lo_discount] = 3;
