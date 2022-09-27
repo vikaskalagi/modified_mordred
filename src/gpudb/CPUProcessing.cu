@@ -1526,7 +1526,6 @@ void probe_aggr_CPU(
               int aggrval1 = 0, aggrval2 = 0;
               if (gargs.aggr_col1 != NULL) aggrval1 = gargs.aggr_col1[lo_offset];
               if (gargs.aggr_col2 != NULL) aggrval2 = gargs.aggr_col2[lo_offset];
-              cout << aggrval1 <<" "<<aggrval2 << " "<<(*(gargs.h_group_func))(aggrval1, aggrval2)<<" check values\n";
                local_sum += (*(gargs.h_group_func))(aggrval1, aggrval2);
               //local_sum += aggrval1 * aggrval2;
             }
@@ -1547,7 +1546,6 @@ void probe_aggr_CPU(
             int aggrval1 = 0, aggrval2 = 0;
             if (gargs.aggr_col1 != NULL) aggrval1 = gargs.aggr_col1[lo_offset];
             if (gargs.aggr_col2 != NULL) aggrval2 = gargs.aggr_col2[lo_offset];
-            cout << aggrval1 <<" "<<aggrval2 << " "<<(*(gargs.h_group_func))(aggrval1, aggrval2)<<" check values\n";
              local_sum += (*(gargs.h_group_func))(aggrval1, aggrval2);
             //local_sum += aggrval1 * aggrval2;
           }
