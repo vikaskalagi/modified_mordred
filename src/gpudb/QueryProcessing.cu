@@ -210,7 +210,7 @@ QueryProcessing::executeTableFact_v1(int sg) {
     else CubDebugExit(cudaMalloc((void**) &d_total, 1 * sizeof(int)));
 
     // printf("fact sg = %d\n", sg);
-
+    cout<<qo->selectCPUPipelineCol[sg].size()<<" "<<qo->selectGPUPipelineCol[sg].size()<<" "<<qo->joinGPUPipelineCol[sg].size()<<" "<<qo->joinCPUPipelineCol[sg].size()<<" "<<qo->groupbyGPUPipelineCol[sg].size()<<" check values\n";
     if (qo->selectCPUPipelineCol[sg].size() > 0) {
       if (qo->selectGPUPipelineCol[sg].size() > 0 && qo->joinGPUPipelineCol[sg].size() > 0) {
         if (qo->joinCPUPipelineCol[sg].size() == 0 && qo->groupbyGPUPipelineCol[sg].size() > 0) {
