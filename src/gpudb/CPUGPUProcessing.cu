@@ -2340,7 +2340,7 @@ CPUGPUProcessing::call_probe_aggr_CPU(QueryParams* params, int** &h_off_col, int
     _dim_len[0], _dim_len[1], _dim_len[2], _dim_len[3],
     _min_key[0], _min_key[1], _min_key[2], _min_key[3]
   };
-  cout <<(h_off_col == NULL)<< " operator func check\n";
+  
   struct groupbyArgsCPU gargs = {
     aggr_col[0], aggr_col[1], NULL, NULL, NULL, NULL,
     0, 0, 0, 0,
