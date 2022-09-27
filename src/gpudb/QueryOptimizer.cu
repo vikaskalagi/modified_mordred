@@ -2724,12 +2724,12 @@ QueryOptimizer::prepareQuery(int query, Distribution dist) {
 			params->map_filter_func_host[cm->lo_quantity] = &host_pred_between;
 		}
 
-		CubDebugExit(cudaMemcpyFromSymbol(&(params->d_group_func), p_mul_func<int>, sizeof(group_func_t<int>)));
-		params->h_group_func = &host_mul_func;
-		cout << " assiged \n";
+		// CubDebugExit(cudaMemcpyFromSymbol(&(params->d_group_func), p_mul_func<int>, sizeof(group_func_t<int>)));
+		// params->h_group_func = &host_mul_func;
+		// cout << " assiged \n";
 		//cout << &params->h_group_func << " "<< &host_mul_func << " " << &host_sub_func << " group func address\n";
-		// CubDebugExit(cudaMemcpyFromSymbol(&(params->d_group_func), p_sub_func<int>, sizeof(group_func_t<int>)));
-		// params->h_group_func = &host_sub_func;
+		CubDebugExit(cudaMemcpyFromSymbol(&(params->d_group_func), p_sub_func<int>, sizeof(group_func_t<int>)));
+		params->h_group_func = &host_sub_func;
 
 		params->unique_val[cm->p_partkey] = 0;
 		params->unique_val[cm->c_custkey] = 0;
