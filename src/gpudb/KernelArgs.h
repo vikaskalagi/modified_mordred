@@ -26,7 +26,7 @@ __device__ T sub_func (T x, T y)
 template <typename T> 
 __device__ T mul_func (T x, T y)
 {
-    return x - y;
+    return x * y;
 }
 
 template <typename T> 
@@ -38,7 +38,7 @@ T host_sub_func (T x, T y)
 template <typename T> 
 T host_mul_func (T x, T y)
 {
-    return x - y;
+    return x * y;
 }
 
 template<typename T, int BLOCK_THREADS, int ITEMS_PER_THREADS>
