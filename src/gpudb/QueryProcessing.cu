@@ -2217,10 +2217,6 @@ QueryProcessing::processQuery(CUcontext ctx) {
 
   SETUP_TIMING();
   float time;
-  float test_time;
-    cudaEvent_t start_p, stop_p; 
-    cudaEventCreate(&start_p); cudaEventCreate(&stop_p);
-    cudaEventRecord(start_p,0);
 
   cudaEventRecord(start, 0);
 
@@ -2249,21 +2245,14 @@ QueryProcessing::processQuery(CUcontext ctx) {
   cudaEventRecord(stop, 0);
   cudaEventSynchronize(stop);
   cudaEventElapsedTime(&time, start, stop);
-  cudaEventElapsedTime(&test_time,start,stop);
-  cout<<test_time <<" " <<time<<" time tester \n"; 
   cgp->optimization_total += time;
 
   if (verbose) {
     cout << "Query Optimization Time: " << time << endl;
     cout << endl;    
   }
-  cout << time<<" initial time\n";
-  TIME_FUNC(runQuery(ctx), time);
-  cout<< time<<" final time\n";
 
-  cudaEventRecord(stop_p, 0);
-  cudaEventSynchronize(stop_p);
-  cudaEventElapsedTime(&test_time, start_p, stop_p);
+  TIME_FUNC(runQuery(ctx), time);
 
   for (int sg = 0 ; sg < MAX_GROUPS; sg++) {
     // cgp->cpu_time_total += cgp->cpu_time[sg];
@@ -2294,7 +2283,6 @@ QueryProcessing::processQuery(CUcontext ctx) {
     cout << "GPU Time: " << cgp->gpu_time_total << endl;
     cout << "Transfer Time: " << cgp->transfer_time_total << endl;
     cout << "Malloc Time: " << cgp->malloc_time_total << endl;
-    cout <<" test execution times"<<cgp->execution_total << " "<<test_time - cgp->optimization_total - cgp->merging_total<<" "<<test_time<<"\n";
     cout << endl;
   }
 
