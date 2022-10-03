@@ -31,7 +31,7 @@ using namespace tbb;
 #define NUM_EVENTS 2
 
 #define BASE_PATH "/home/vikas/vikas/paper_code/modified_mordred/test/ssb/data/"
-#define DATABSE_DATA_DIR "/home/vikas/vikas/paper_code/ICDE2019-GPU-Join/" 
+#define DATABSE_DATA_DIR "/home/vikas/vikas/paper_code/" "ICDE2019-GPU-Join/"
 #if SF == 1
 #define DATA_DIR BASE_PATH "s1_columnar/"
 #define LO_LEN 10
