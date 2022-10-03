@@ -31,15 +31,15 @@ using namespace tbb;
 #define NUM_EVENTS 2
 
 #define BASE_PATH "/home/vikas/vikas/paper_code/modified_mordred/test/ssb/data/"
-
+#define database_Path "/home/vikas/vikas/paper_code/ICDE2019-GPU-Join/" 
 #if SF == 1
 #define DATA_DIR BASE_PATH "s1_columnar/"
-#define LO_LEN 5
+#define LO_LEN 10
 //#define LO_LEN 1000
 #define P_LEN 3
 #define S_LEN 3
 #define C_LEN 3
-#define D_LEN 3
+#define D_LEN 5
 #elif SF == 10
 #define DATA_DIR BASE_PATH "s10_columnar/"
 #define LO_LEN 59986214
@@ -152,6 +152,9 @@ T* loadColumnPinned(string col_name, int num_entries) {
   T* h_col;
   CubDebugExit(cudaHostAlloc((void**) &h_col, ((num_entries + SEGMENT_SIZE - 1)/SEGMENT_SIZE) * SEGMENT_SIZE * sizeof(T), cudaHostAllocDefault));
   string filename = DATA_DIR + lookup(col_name);
+  if col_name == "d_datekey"{
+    filename = database_Path + "s_unique_5.bin";
+  }
   ifstream colData (filename.c_str(), ios::in | ios::binary);
   if (!colData) {
     return NULL;
@@ -178,7 +181,12 @@ template<typename T>
 T* loadColumnPinnedSort(string col_name, int num_entries) {
   T* h_col;
   CubDebugExit(cudaHostAlloc((void**) &h_col, ((num_entries + SEGMENT_SIZE - 1)/SEGMENT_SIZE) * SEGMENT_SIZE * sizeof(T), cudaHostAllocDefault));
-  string filename = DATA_DIR + lookupSort(col_name);
+  string filename;
+  if col_name == "lo_orderdate"{
+    filename = database_Path + "r_unique_10.bin";
+  }else{
+   filename = DATA_DIR + lookupSort(col_name);
+  }
   ifstream colData (filename.c_str(), ios::in | ios::binary);
   if (!colData) {
     return NULL;

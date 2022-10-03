@@ -1274,47 +1274,48 @@ CacheManager::loadColumnToCPU() {
 	h_d_yearmonthnum = loadColumnPinned<int>("d_yearmonthnum", D_LEN);
 
 	for(int ui=0;ui<LO_LEN;ui++){
+		h_lo_quantity[i]= 1;
 		cout<<h_lo_orderdate[ui]<<" "<<h_lo_discount[ui]<<" "<<h_lo_extendedprice[ui]<<" "<<h_lo_quantity[ui]<<" lo table data\n";
 	}
 	for(int ui=0;ui<D_LEN;ui++){
 		cout<<h_d_datekey[ui] <<" "<<h_d_yearmonthnum[ui]<<" datakey table data\n";
 	}
+	
+	// h_lo_orderdate[0] = 19940101;
+	// h_lo_orderdate[1] = 19940103;
+	// h_lo_orderdate[2] = 19940101;
+	// h_lo_orderdate[3] = 19950101;
+	// h_lo_orderdate[4] = 19950101;
 
-	h_lo_orderdate[0] = 19940101;
-	h_lo_orderdate[1] = 19940103;
-	h_lo_orderdate[2] = 19940101;
-	h_lo_orderdate[3] = 19950101;
-	h_lo_orderdate[4] = 19950101;
+	// h_lo_discount[0] = 4;
+	// h_lo_discount[1] = 5;
+	// h_lo_discount[2] = 7;
+	// h_lo_discount[3] = 8;
+	// h_lo_discount[4] = 6;
 
-	h_lo_discount[0] = 4;
-	h_lo_discount[1] = 5;
-	h_lo_discount[2] = 7;
-	h_lo_discount[3] = 8;
-	h_lo_discount[4] = 6;
+	// h_lo_quantity[0] = 22;
+	// h_lo_quantity[1] = 22;
+	// h_lo_quantity[2] = 30;
+	// h_lo_quantity[3] = 23;
+	// h_lo_quantity[4] = 24;
 
-	h_lo_quantity[0] = 22;
-	h_lo_quantity[1] = 22;
-	h_lo_quantity[2] = 30;
-	h_lo_quantity[3] = 23;
-	h_lo_quantity[4] = 24;
+	// h_lo_extendedprice[0] = 1;
+	// h_lo_extendedprice[1] = 2;
+	// h_lo_extendedprice[2] = 1;
+	// h_lo_extendedprice[3] = 2;
+	// h_lo_extendedprice[4] = 3;
 
-	h_lo_extendedprice[0] = 1;
-	h_lo_extendedprice[1] = 2;
-	h_lo_extendedprice[2] = 1;
-	h_lo_extendedprice[3] = 2;
-	h_lo_extendedprice[4] = 3;
+	// h_d_datekey[0] = 19940101;
+	// h_d_datekey[1] = 19940102;
+	// h_d_datekey[2] = 19940103;
 
-	h_d_datekey[0] = 19940101;
-	h_d_datekey[1] = 19940102;
-	h_d_datekey[2] = 19940103;
+	// h_d_yearmonthnum[0] = 199401;
+	// h_d_yearmonthnum[1] = 199401;
+	// h_d_yearmonthnum[2] = 199401;
 
-	h_d_yearmonthnum[0] = 199401;
-	h_d_yearmonthnum[1] = 199401;
-	h_d_yearmonthnum[2] = 199401;
-
-	h_d_year[0] = 1992;
-	h_d_year[1] = 1993;
-	h_d_year[2] = 1994; 
+	// h_d_year[0] = 1992;
+	// h_d_year[1] = 1993;
+	// h_d_year[2] = 1994; 
 	for(int ui=0;ui<LO_LEN;ui++){
 		cout<<h_lo_orderdate[ui]<<" "<<h_lo_discount[ui]<<" "<<h_lo_extendedprice[ui]<<" lo table data\n";
 	}
