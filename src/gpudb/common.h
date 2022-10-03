@@ -152,10 +152,19 @@ template<typename T>
 T* loadColumnPinned(string col_name, int num_entries) {
   T* h_col;
   CubDebugExit(cudaHostAlloc((void**) &h_col, ((num_entries + SEGMENT_SIZE - 1)/SEGMENT_SIZE) * SEGMENT_SIZE * sizeof(T), cudaHostAllocDefault));
-  string filename = DATA_DIR + lookup(col_name);
+  
   if (col_name == "d_datekey"){
-    //filename = DATABSE_DATA_DIR + "s_unique_5.bin";
+    string filename = "/home/vikas/vikas/paper_code/ICDE2019-GPU-Join/s_unique_5.bin";
+    ifstream colData (filename, ios::in | ios::binary);
+  if (!colData) {
+    return NULL;
   }
+
+  colData.read((char*)h_col, num_entries * sizeof(T));
+  return h_col;
+  }
+  else{
+    string filename = DATA_DIR + lookup(col_name);
   ifstream colData (filename.c_str(), ios::in | ios::binary);
   if (!colData) {
     return NULL;
@@ -163,6 +172,7 @@ T* loadColumnPinned(string col_name, int num_entries) {
 
   colData.read((char*)h_col, num_entries * sizeof(T));
   return h_col;
+}
 }
 
 template<typename T>
