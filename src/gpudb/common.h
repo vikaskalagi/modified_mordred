@@ -31,7 +31,7 @@ using namespace tbb;
 #define NUM_EVENTS 2
 
 #define BASE_PATH "/home/vikas/vikas/paper_code/modified_mordred/test/ssb/data/"
-#define database_Path "/home/vikas/vikas/paper_code/ICDE2019-GPU-Join/" 
+#define DATABSE_DATA_DIR "/home/vikas/vikas/paper_code/ICDE2019-GPU-Join/" 
 #if SF == 1
 #define DATA_DIR BASE_PATH "s1_columnar/"
 #define LO_LEN 10
@@ -153,7 +153,7 @@ T* loadColumnPinned(string col_name, int num_entries) {
   CubDebugExit(cudaHostAlloc((void**) &h_col, ((num_entries + SEGMENT_SIZE - 1)/SEGMENT_SIZE) * SEGMENT_SIZE * sizeof(T), cudaHostAllocDefault));
   string filename = DATA_DIR + lookup(col_name);
   if (col_name == "d_datekey"){
-    filename = database_Path + "s_unique_5.bin";
+    filename = DATABSE_DATA_DIR + "s_unique_5.bin";
   }
   ifstream colData (filename.c_str(), ios::in | ios::binary);
   if (!colData) {
@@ -183,7 +183,7 @@ T* loadColumnPinnedSort(string col_name, int num_entries) {
   CubDebugExit(cudaHostAlloc((void**) &h_col, ((num_entries + SEGMENT_SIZE - 1)/SEGMENT_SIZE) * SEGMENT_SIZE * sizeof(T), cudaHostAllocDefault));
   string filename;
   if (col_name == "lo_orderdate"){
-    filename = database_Path + "r_unique_10.bin";
+    filename = DATABSE_DATA_DIR + "r_unique_10.bin";
   }else{
    filename = DATA_DIR + lookupSort(col_name);
   }
