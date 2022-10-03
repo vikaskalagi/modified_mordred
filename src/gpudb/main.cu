@@ -475,15 +475,15 @@ int main() {
 		}
 
 		cout << endl;
-		cout << "Cumulated Time: " << time << endl;
-		cout << "CPU traffic: " << cpu_traffic << endl;
-		cout << "GPU traffic: " << gpu_traffic << endl;
-		cout << "CPU to GPU traffic: " << cpu_to_gpu  << endl;
-		cout << "GPU to CPU traffic: " << gpu_to_cpu  << endl;
-		cout << "Malloc time: " << malloc_time_total << endl;
-		cout << "Execution time: " << execution_time << endl;
-		cout << "Optimization time: " << optimization_time << endl;
-		cout << "Merging time: " << merging_time << endl;
+		cout << "Cumulated Time: " << time/5.0 << endl;
+		cout << "CPU traffic: " << cpu_traffic/5.0 << endl;
+		cout << "GPU traffic: " << gpu_traffic/5.0 << endl;
+		cout << "CPU to GPU traffic: " << cpu_to_gpu/5.0  << endl;
+		cout << "GPU to CPU traffic: " << gpu_to_cpu/5.0  << endl;
+		cout << "Malloc time: " << malloc_time_total/5.0 << endl;
+		cout << "Execution time: " << execution_time/5.0 << endl;
+		cout << "Optimization time: " << optimization_time/5.0 << endl;
+		cout << "Merging time: " << merging_time/5.0 << endl;
 		cout << "Fraction Skipped Segment: " << skipped_segment * 1.0 /(processed_segment + skipped_segment) << endl;
 		cout << endl;
 
