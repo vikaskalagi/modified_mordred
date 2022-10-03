@@ -2217,7 +2217,7 @@ QueryProcessing::processQuery(CUcontext ctx) {
 
   SETUP_TIMING();
   float time;
-
+  float test_time;
   cudaEventRecord(start, 0);
 
   qo->parseQuery(query);
@@ -2245,6 +2245,8 @@ QueryProcessing::processQuery(CUcontext ctx) {
   cudaEventRecord(stop, 0);
   cudaEventSynchronize(stop);
   cudaEventElapsedTime(&time, start, stop);
+  cudaEventElapsedTime(&test_time,start,stop);
+  cout<<test_time <<" " <<time<<" time tester \n"; 
   cgp->optimization_total += time;
 
   if (verbose) {
