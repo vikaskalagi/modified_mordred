@@ -152,7 +152,7 @@ T* loadColumnPinned(string col_name, int num_entries) {
   T* h_col;
   CubDebugExit(cudaHostAlloc((void**) &h_col, ((num_entries + SEGMENT_SIZE - 1)/SEGMENT_SIZE) * SEGMENT_SIZE * sizeof(T), cudaHostAllocDefault));
   string filename = DATA_DIR + lookup(col_name);
-  if col_name == "d_datekey"{
+  if (col_name == "d_datekey"){
     filename = database_Path + "s_unique_5.bin";
   }
   ifstream colData (filename.c_str(), ios::in | ios::binary);
@@ -182,7 +182,7 @@ T* loadColumnPinnedSort(string col_name, int num_entries) {
   T* h_col;
   CubDebugExit(cudaHostAlloc((void**) &h_col, ((num_entries + SEGMENT_SIZE - 1)/SEGMENT_SIZE) * SEGMENT_SIZE * sizeof(T), cudaHostAllocDefault));
   string filename;
-  if col_name == "lo_orderdate"{
+  if (col_name == "lo_orderdate"){
     filename = database_Path + "r_unique_10.bin";
   }else{
    filename = DATA_DIR + lookupSort(col_name);
