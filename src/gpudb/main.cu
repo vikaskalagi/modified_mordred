@@ -135,14 +135,14 @@ int main() {
 
 			} else {
 				for (int i=0;i<5;i++){
-				time1 = qp->processQuery(sessionCtx);
-				malloc_time_total1 = cgp->malloc_time_total;
-				cpu_to_gpu1 = cgp->cpu_to_gpu_total;
-				gpu_to_cpu1 = cgp->gpu_to_cpu_total;
-				execution_time1 = cgp->execution_total;
-				optimization_time1 = cgp->optimization_total;
-				merging_time1 = cgp->merging_total;
-				cgp->resetTime();
+				// time1 = qp->processQuery(sessionCtx);
+				// malloc_time_total1 = cgp->malloc_time_total;
+				// cpu_to_gpu1 = cgp->cpu_to_gpu_total;
+				// gpu_to_cpu1 = cgp->gpu_to_cpu_total;
+				// execution_time1 = cgp->execution_total;
+				// optimization_time1 = cgp->optimization_total;
+				// merging_time1 = cgp->merging_total;
+				// cgp->resetTime();
 
 				time2 = qp->processQuery2(sessionCtx);
 				malloc_time_total2 = cgp->malloc_time_total;
