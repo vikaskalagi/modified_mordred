@@ -134,6 +134,7 @@ int main() {
 				execution_time += execution_time1; optimization_time += optimization_time1; merging_time += merging_time1;
 
 			} else {
+				for (int i=0;i<5;i++){
 				time1 = qp->processQuery(sessionCtx);
 				malloc_time_total1 = cgp->malloc_time_total;
 				cpu_to_gpu1 = cgp->cpu_to_gpu_total;
@@ -158,6 +159,7 @@ int main() {
 				} else {
 					time += time2; cpu_to_gpu += cpu_to_gpu2; gpu_to_cpu += gpu_to_cpu2; malloc_time_total += malloc_time_total2;
 					execution_time += execution_time2; optimization_time += optimization_time2; merging_time += merging_time2;
+				}
 				}
 			}
 
