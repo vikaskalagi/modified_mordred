@@ -2251,9 +2251,9 @@ QueryProcessing::processQuery(CUcontext ctx) {
     cout << "Query Optimization Time: " << time << endl;
     cout << endl;    
   }
-
+  cout << time<<" initial time\n";
   TIME_FUNC(runQuery(ctx), time);
-
+  cout<< time<<" final time\n";
   for (int sg = 0 ; sg < MAX_GROUPS; sg++) {
     // cgp->cpu_time_total += cgp->cpu_time[sg];
     // cgp->gpu_time_total += cgp->gpu_time[sg];
