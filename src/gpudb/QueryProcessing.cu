@@ -110,7 +110,9 @@ QueryProcessing::executeTableDim(int table_id, int sg) {
     int *h_off_col = NULL, *d_off_col = NULL;
     int* d_total = NULL;
     int* h_total = NULL;
-
+    cudaEvent_t start, stop; cudaEventCreate(&start); cudaEventCreate(&stop);
+    float time;
+    cudaEventRecord(start, 0);
     if (custom) h_total = (int*) cm->customCudaHostAlloc<int>(1);
     else CubDebugExit(cudaHostAlloc((void**) &h_total, 1 * sizeof(int), cudaHostAllocDefault));
     memset(h_total, 0, sizeof(int));
@@ -147,7 +149,10 @@ QueryProcessing::executeTableDim(int table_id, int sg) {
     } else {
       assert(0);
     }
-
+     cudaEventRecord(stop, 0);
+    cudaEventSynchronize(stop);
+    cudaEventElapsedTime(&time, start, stop);
+    cout<< "executeTableDim time taken: "<<time<<"\n";
 }
 
 void
