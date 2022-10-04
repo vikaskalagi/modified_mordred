@@ -1493,7 +1493,7 @@ QueryProcessing::runQuery2(CUcontext ctx) {
     parallel_for(short(0), qo->par_segment_count[table_id], [=](short j){
        cudaEvent_t start_, stop_; cudaEventCreate(&start_); cudaEventCreate(&stop_);
     float time_;
-    cudaEventRecord(start_, 0);
+    // cudaEventRecord(start_, 0);
       CUcontext poppedCtx;
       cuCtxPushCurrent(ctx);
 
@@ -1503,19 +1503,19 @@ QueryProcessing::runQuery2(CUcontext ctx) {
         cout << qo->join[i].second->column_name << endl;
         printf("sg = %d\n", sg);
       }
-
+cudaEventRecord(start_, 0);
       CubDebugExit(cudaStreamCreate(&streams[sg]));
 
       if (qo->segment_group_count[table_id][sg] > 0) {
         executeTableDim(table_id, sg);
       }
-     cudaEventRecord(stop_, 0);
+     
+      CubDebugExit(cudaStreamSynchronize(streams[sg]));
+      CubDebugExit(cudaStreamDestroy(streams[sg]));
+cudaEventRecord(stop_, 0);
   cudaEventSynchronize(stop_);
   cudaEventElapsedTime(&time_, start_, stop_);
     cout << "find time " << time_ << endl;
-      CubDebugExit(cudaStreamSynchronize(streams[sg]));
-      CubDebugExit(cudaStreamDestroy(streams[sg]));
-
       cuCtxPopCurrent(&poppedCtx);
  
     });
