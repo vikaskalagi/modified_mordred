@@ -1481,6 +1481,11 @@ QueryProcessing::runQuery2(CUcontext ctx) {
   SETUP_TIMING();
   float time;
   cudaEventRecord(start, 0);
+
+  cudaEvent_t start_, stop_; cudaEventCreate(&start_); cudaEventCreate(&stop_);
+    float time_;
+    cudaEventRecord(start_, 0);
+
   cout << qo->join.size() << " join size\n";
   for (int i = 0; i < qo->join.size(); i++) {
     int table_id = qo->join[i].second->table_id;
@@ -1515,6 +1520,11 @@ QueryProcessing::runQuery2(CUcontext ctx) {
     // }
 
     CubDebugExit(cudaDeviceSynchronize());
+
+  cudaEventRecord(stop_, 0);
+  cudaEventSynchronize(stop_);
+  cudaEventElapsedTime(&time_, start_, stop_);
+    cout << "find time " << time_ << endl;
   }
 
   cudaEventRecord(stop, 0);
