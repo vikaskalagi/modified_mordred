@@ -1014,7 +1014,7 @@ CPUGPUProcessing::call_probe_GPU(QueryParams* params, int** &off_col, int* &d_to
   int output_estimate = 0;
 
   int tile_items = 128*4;
-  cout<<"call probe gpu \n";
+
   if(qo->joinGPUPipelineCol[sg].size() == 0) return;
 
   off_col_out = new int*[cm->TOT_TABLE] (); //initialize it to null
@@ -2340,7 +2340,6 @@ CPUGPUProcessing::call_probe_aggr_CPU(QueryParams* params, int** &h_off_col, int
     _dim_len[0], _dim_len[1], _dim_len[2], _dim_len[3],
     _min_key[0], _min_key[1], _min_key[2], _min_key[3]
   };
-
   struct groupbyArgsCPU gargs = {
     aggr_col[0], aggr_col[1], NULL, NULL, NULL, NULL,
     0, 0, 0, 0,

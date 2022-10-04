@@ -685,6 +685,7 @@ QueryProcessing::executeTableFact_v2(int sg) {
     else CubDebugExit(cudaMalloc((void**) &d_total, 1 * sizeof(int)));
 
     if (verbose) printf("sg = %d\n", sg);
+    cout<<qo->selectCPUPipelineCol[sg].size()<<" "<<qo->selectGPUPipelineCol[sg].size()<<" "<<qo->joinGPUPipelineCol[sg].size()<<" "<<qo->joinCPUPipelineCol[sg].size()<<" "<<qo->groupbyGPUPipelineCol[sg].size()<<" check values\n";
 
     if (qo->selectGPUPipelineCol[sg].size() > 0) {
       if (qo->selectCPUPipelineCol[sg].size() > 0 && qo->joinCPUPipelineCol[sg].size() > 0) {
