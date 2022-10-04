@@ -1514,17 +1514,17 @@ QueryProcessing::runQuery2(CUcontext ctx) {
       CubDebugExit(cudaStreamDestroy(streams[sg]));
 
       cuCtxPopCurrent(&poppedCtx);
-
+  cudaEventRecord(stop_, 0);
+  cudaEventSynchronize(stop_);
+  cudaEventElapsedTime(&time_, start_, stop_);
+    cout << "find time " << time_ << endl;
     });
     
     // }
 
     CubDebugExit(cudaDeviceSynchronize());
 
-  cudaEventRecord(stop_, 0);
-  cudaEventSynchronize(stop_);
-  cudaEventElapsedTime(&time_, start_, stop_);
-    cout << "find time " << time_ << endl;
+  
   }
 
   cudaEventRecord(stop, 0);
