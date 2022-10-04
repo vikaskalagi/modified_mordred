@@ -896,7 +896,7 @@ QueryProcessing::executeTableFact_v2(int sg) {
         if (qo->joinGPUPipelineCol[sg].size() == 0 && qo->groupbyGPUPipelineCol[sg].size() == 0) {
           assert(0);
         } else if (qo->joinGPUPipelineCol[sg].size() > 0 && qo->groupbyGPUPipelineCol[sg].size() == 0) {
-
+            cout<<" came inside \n";
           cgp->call_probe_GPU(params, off_col, d_total, h_total, sg, streams[sg]);
           cgp->switch_device_fact(off_col, h_off_col, d_total, h_total, sg, 1, 0, streams[sg]);
           if (qo->groupby_build.size() == 0) cgp->call_aggregation_CPU(params, h_off_col[0], h_total, sg);
