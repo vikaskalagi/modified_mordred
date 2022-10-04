@@ -1482,9 +1482,7 @@ QueryProcessing::runQuery2(CUcontext ctx) {
   float time;
   cudaEventRecord(start, 0);
 
-  cudaEvent_t start_, stop_; cudaEventCreate(&start_); cudaEventCreate(&stop_);
-    float time_;
-    cudaEventRecord(start_, 0);
+ 
 
   cout << qo->join.size() << " join size\n";
   for (int i = 0; i < qo->join.size(); i++) {
@@ -1493,7 +1491,9 @@ QueryProcessing::runQuery2(CUcontext ctx) {
     // for (short j = 0; j < qo->par_segment_count[table_id]; j++) {
 
     parallel_for(short(0), qo->par_segment_count[table_id], [=](short j){
-
+       cudaEvent_t start_, stop_; cudaEventCreate(&start_); cudaEventCreate(&stop_);
+    float time_;
+    cudaEventRecord(start_, 0);
       CUcontext poppedCtx;
       cuCtxPushCurrent(ctx);
 
