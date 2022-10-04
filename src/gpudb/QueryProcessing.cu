@@ -1476,7 +1476,7 @@ QueryProcessing::runQuery2(CUcontext ctx) {
   SETUP_TIMING();
   float time;
   cudaEventRecord(start, 0);
-  
+  cout << qo->join.size() << " join size\n";
   for (int i = 0; i < qo->join.size(); i++) {
     int table_id = qo->join[i].second->table_id;
 
