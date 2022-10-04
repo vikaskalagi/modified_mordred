@@ -1509,15 +1509,15 @@ QueryProcessing::runQuery2(CUcontext ctx) {
       if (qo->segment_group_count[table_id][sg] > 0) {
         executeTableDim(table_id, sg);
       }
-
+     cudaEventRecord(stop_, 0);
+  cudaEventSynchronize(stop_);
+  cudaEventElapsedTime(&time_, start_, stop_);
+    cout << "find time " << time_ << endl;
       CubDebugExit(cudaStreamSynchronize(streams[sg]));
       CubDebugExit(cudaStreamDestroy(streams[sg]));
 
       cuCtxPopCurrent(&poppedCtx);
-  cudaEventRecord(stop_, 0);
-  cudaEventSynchronize(stop_);
-  cudaEventElapsedTime(&time_, start_, stop_);
-    cout << "find time " << time_ << endl;
+ 
     });
     
     // }
