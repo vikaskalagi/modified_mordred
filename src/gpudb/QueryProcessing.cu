@@ -110,9 +110,7 @@ QueryProcessing::executeTableDim(int table_id, int sg) {
     int *h_off_col = NULL, *d_off_col = NULL;
     int* d_total = NULL;
     int* h_total = NULL;
-    cudaEvent_t start, stop; cudaEventCreate(&start); cudaEventCreate(&stop);
-    float time;
-    cudaEventRecord(start, 0);
+
     if (custom) h_total = (int*) cm->customCudaHostAlloc<int>(1);
     else CubDebugExit(cudaHostAlloc((void**) &h_total, 1 * sizeof(int), cudaHostAllocDefault));
     memset(h_total, 0, sizeof(int));
@@ -149,10 +147,7 @@ QueryProcessing::executeTableDim(int table_id, int sg) {
     } else {
       assert(0);
     }
-     cudaEventRecord(stop, 0);
-    cudaEventSynchronize(stop);
-    cudaEventElapsedTime(&time, start, stop);
-    cout<< "executeTableDim time taken: "<<time<<"\n";
+
 }
 
 void
@@ -1481,20 +1476,14 @@ QueryProcessing::runQuery2(CUcontext ctx) {
   SETUP_TIMING();
   float time;
   cudaEventRecord(start, 0);
-
- 
-
-  cout << qo->join.size() << " join size\n";
+  
   for (int i = 0; i < qo->join.size(); i++) {
     int table_id = qo->join[i].second->table_id;
 
     // for (short j = 0; j < qo->par_segment_count[table_id]; j++) {
 
     parallel_for(short(0), qo->par_segment_count[table_id], [=](short j){
-       cudaEvent_t start_, stop_; cudaEventCreate(&start_); cudaEventCreate(&stop_);
-    float time_;
-    // cudaEventRecord(start_, 0);
-    cudaEventRecord(start_, 0);
+
       CUcontext poppedCtx;
       cuCtxPushCurrent(ctx);
 
@@ -1510,22 +1499,17 @@ QueryProcessing::runQuery2(CUcontext ctx) {
       if (qo->segment_group_count[table_id][sg] > 0) {
         executeTableDim(table_id, sg);
       }
-     
+
       CubDebugExit(cudaStreamSynchronize(streams[sg]));
       CubDebugExit(cudaStreamDestroy(streams[sg]));
 
       cuCtxPopCurrent(&poppedCtx);
- cudaEventRecord(stop_, 0);
-  cudaEventSynchronize(stop_);
-  cudaEventElapsedTime(&time_, start_, stop_);
-    cout << "find time " << time_ << endl;
+
     });
     
     // }
 
     CubDebugExit(cudaDeviceSynchronize());
-
-  
   }
 
   cudaEventRecord(stop, 0);
