@@ -1494,6 +1494,7 @@ QueryProcessing::runQuery2(CUcontext ctx) {
        cudaEvent_t start_, stop_; cudaEventCreate(&start_); cudaEventCreate(&stop_);
     float time_;
     // cudaEventRecord(start_, 0);
+    cudaEventRecord(start_, 0);
       CUcontext poppedCtx;
       cuCtxPushCurrent(ctx);
 
@@ -1503,7 +1504,7 @@ QueryProcessing::runQuery2(CUcontext ctx) {
         cout << qo->join[i].second->column_name << endl;
         printf("sg = %d\n", sg);
       }
-cudaEventRecord(start_, 0);
+
       CubDebugExit(cudaStreamCreate(&streams[sg]));
 
       if (qo->segment_group_count[table_id][sg] > 0) {
